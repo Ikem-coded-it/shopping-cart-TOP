@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-light-light: #e4e4e7;
+  --font-dark-light: #a1a1aa;
+  --main-color: #09090b;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--font-dark-light);
+}
+
+#root, .landing-page {
+  height: 100%;
+  width: 100%;
+}

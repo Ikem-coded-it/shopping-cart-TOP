@@ -1,0 +1,33 @@
+.nav-bar {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  background-color: var(--main-color);
+  color: var(--font-light-light)
+}
+
+.logo {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
+  font-size: 25px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav {
+  width: 50%;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.nav-list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  gap: 10%;
+}
