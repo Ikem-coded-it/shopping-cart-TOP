@@ -7,6 +7,15 @@
   background-size: cover;
 }
 
+.main-background-mobile {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  background-image: url("../images/images\ \(9\).jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .write-up-container {
   height: 100%;
   width: 50%;
@@ -46,12 +55,52 @@
 }
 
 button {
-  width: 200px;
-  height: 70px;
+  width: 60%;
+  height: 10%;
   font-size: 20px;
   color: var(--font-light-light);
   background-color: var(--main-color);
   cursor: pointer;
   border-radius: 5px;
   font-family: Geneva, Verdana, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-background {
+    justify-content: center;
+  }
+
+  .write-up-container {
+    width: 95%;
+  }
+
+  .write-up {
+    width: 100%;
+  }
+
+  .welcome {
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .to {
+    font-size: 20px;
+  }
+
+  .baller-store {
+    font-size: 40px;
+  }
+
+  .para {
+    width: 80%;
+    display: flex;
+    overflow-wrap: break-word;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  button {
+    font-size: 15px;
+  }
 }
