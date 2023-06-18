@@ -1,18 +1,9 @@
-import {useState, useEffect, useRef} from "react"
+ import { Link } from "react-router-dom"
 import "./styles.css"
 
 export default function Main() {
-  const [background, setBackground] = useState("main-background")
-
-  useEffect(() => {
-    const screenWidth = window.innerWidth
-    if (screenWidth < 600) {
-      setBackground("main-background-mobile")
-    }
-  }, [])
-
   return(
-    <div className={background}>
+    <div className="main-background">
       <div className="write-up-container">
         <div className="write-up">
           <div className="welcome">Welcome</div>
@@ -20,7 +11,7 @@ export default function Main() {
           <div className="baller-store">BallerStore</div>
           <div className="para">Ready to take your game to the next level?</div>
         </div>
-        <button>Get Some Balls</button>
+        <Link className="link" to="/balls"><button>Get Some Balls</button></Link>
       </div>
     </div>
   )

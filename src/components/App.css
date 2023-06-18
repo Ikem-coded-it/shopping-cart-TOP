@@ -6,17 +6,20 @@
 :root {
   --font-light-light: #e4e4e7;
   --font-dark-light: #a1a1aa;
+  --font-dark-dark: #111827;
   --main-color: #09090b;
+  --ball-card-background: #fafafa;
+  --product-page-background: #f1f5f9;
 }
 
 body {
-  height: 100vh;
+  height: fit-content;
   width: 100vw;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--font-dark-light);
 }
 
-#root, .landing-page {
-  height: 100%;
+#root {
+  height: fit-content;
   width: 100%;
 }

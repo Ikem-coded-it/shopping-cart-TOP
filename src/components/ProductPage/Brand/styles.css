@@ -1,0 +1,45 @@
+.brand-container {
+  padding: 20px;
+  height: 100%;
+  width: 80%;
+  /* border: 2px solid green; */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+h1 {
+  color: var(--font-dark-dark);
+  font-family: sans-serif;
+}
+
+.ball-cards-container {
+  width: 80%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 6.3%;
+  color: var(--font-dark-dark);
+}
+
+.brand-description {
+  font-size: 17px;
+  color: var(--font-dark-dark);
+}
+
+@media only screen and (max-width: 600px) {
+  .brand-container {
+    padding: 0;
+    gap: 25px;
+  }
+
+  .ball-cards-container {
+    width: 90%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 7.3%;
+  }
+}
