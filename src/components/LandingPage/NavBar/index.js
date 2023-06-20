@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import { Link } from "react-router-dom"
 
 import "./styles.css"
 
@@ -10,9 +10,9 @@ function NavBar() {
       </h1>
       <nav className="nav">
         <ul className="nav-list">
-          <li className="nav-list-items">Home</li>
-          <li className="nav-list-items">Blog</li>
-          <li className="nav-list-items">Contact</li>
+          <Link className="nav-list-items" to="/">Home</Link>
+          <Link className="nav-list-items" to="/balls">Shop</Link>
+          <Link className="nav-list-items" to="/contacts">Contact</Link>
         </ul>
       </nav>
     </div>

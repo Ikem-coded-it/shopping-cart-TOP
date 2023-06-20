@@ -4,7 +4,11 @@
   position: absolute;
   top: 50px;
   right: 50px;
-  border: 2px solid red;
+  transition: transform 200ms ease-out;
+}
+
+.cart:hover {
+  transform: scale(1.1)
 }
 
 .shopping-cart-open {
@@ -29,6 +33,7 @@
   border-radius: 50%;
   position: relative;
   top: 45px;
+  left: 20px;
 }
 
 .cart-modal {
@@ -79,11 +84,19 @@
   width: 80%;
   display: flex;
   background-color: var(--ball-card-background);
+  position: relative;
+  box-shadow: 1px 1px 8px #4b5563;
+}
+
+.remove-item-btn {
+  font-size: 20px;
+  color: var(--font-dark-light);
 }
 
 .cart-item-card-image {
-  height: 100%;
+  height: 95%;
   width: 20%;
+  margin-left: 10px;
 }
 
 .cart-item-controls-price-container {
@@ -120,6 +133,17 @@
 .left-arrow-container:hover,
 .right-arrow-container:hover {
   background-color: burlywood;
+}
+
+.qty-display {
+  width: 40px;
+  height: 30px;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--font-dark-light);
+  color: var(--font-light-light);
 }
 
 .checkout-btn-container {
@@ -183,6 +207,10 @@
     width: 95%;
   }
 
+  .remove-item-btn {
+    font-size: 17px;
+  }
+
   .cart-item-card-image {
     width: 30%;
   }
@@ -190,6 +218,10 @@
   .cart-item-controls-price-container {
     font-size: 17px;
     gap: 5px;
+  }
+  
+  .control {
+    gap: 10px;
   }
 
   .total-price-display {

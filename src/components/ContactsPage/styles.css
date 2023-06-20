@@ -1,0 +1,42 @@
+.contacts {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.socials {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.contact-icon {
+  font-size: 200px;
+}
+
+.socials.fa-github {
+  color: rgb(43, 42, 42);
+}
+
+.fa-whatsapp {
+  color: rgb(26, 206, 26);
+}
+
+.fa-twitter {
+  color: rgb(42, 131, 247);
+}
+
+@media only screen and (max-width: 600px) {
+  .socials {
+    gap: 40px;
+  }
+
+  .contact-icon {
+    font-size: 70px;
+  }
+}

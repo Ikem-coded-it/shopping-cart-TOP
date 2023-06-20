@@ -8,6 +8,7 @@ export default function Cart () {
   const cartModalOpen = useRef()
   const cartModalClose = useRef()
   const cartContext = useContext(CartContext)
+  const cartItemsDuplicate = [...cartContext.cartItems]
 
   const handleCartOpen = () => {
     cartModal.current.showModal()
@@ -26,7 +27,11 @@ export default function Cart () {
         onClick={() => handleCartOpen()}>
         <div 
           className="count-display">
-          {cartContext.cartNumber}
+          {
+            cartItemsDuplicate.reduce((prev, curr) => {
+              return parseInt(curr.qty) + parseInt(prev)
+            }, 0)
+          }
         </div>
         <i className="fa-solid fa-cart-shopping"></i>
       </div>
@@ -50,6 +55,7 @@ export default function Cart () {
                     src={cartItem.imageSrc}
                     qty={cartItem.qty}
                     price={cartItem.price}
+                    title={cartItem.title}
                   />
                 )
               })
@@ -59,7 +65,12 @@ export default function Cart () {
             className="checkout-btn-container">
             <div 
               className="total-price-display">
-              Total: $00
+              Total: ${
+                cartItemsDuplicate.reduce((prev, curr) => {
+                  const priceNumber = curr.price.split("$")[1]
+                  return prev + (priceNumber * curr.qty)
+                }, 0)
+              }
             </div>
             <button 
               className="checkout-btn">
@@ -73,10 +84,45 @@ export default function Cart () {
   )
 }
 
-function CartItemCard ({ src, qty, price }) {
+function CartItemCard ({ src, qty, price, title }) {
+  const cartContext = useContext(CartContext)
+
+  function handleIncrementQty () {
+    const cartItems = [...cartContext.cartItems]
+    cartItems.forEach(item => {
+      if (title === item.title) {
+        if (item.qty >= 10) return
+        item.qty++
+      }
+    })
+    cartContext.setCartItems(cartItems)
+  }
+
+  function handleDecrementQty () {
+    const cartItems = [...cartContext.cartItems]
+    cartItems.forEach(item => {
+      if (title === item.title) {
+        if (item.qty <= 1) return
+        item.qty--
+      }
+    })
+    cartContext.setCartItems(cartItems)
+  }
+
+  function handleRemoveCartItem () {
+    const filteredCart = cartContext.cartItems.filter(item => {
+      if (item.title !== title) return item
+    })
+    cartContext.setCartItems(filteredCart)
+  }
+
   return (
     <div 
       className="cart-item-card">
+      <i 
+        onClick={() => handleRemoveCartItem()} 
+        className="fa-solid fa-x remove-item-btn"
+      ></i>
       <img 
         className="cart-item-card-image"
         src={src} 
@@ -89,13 +135,17 @@ function CartItemCard ({ src, qty, price }) {
         </div>
         <div 
           className="control">
-          <div className="left-arrow-container">
+          <div 
+            onClick={() => handleDecrementQty()}
+            className="left-arrow-container">
             <i className="fa-solid fa-arrow-left"></i>
           </div>
-          <div>
+          <div className="qty-display">
             {qty}
           </div>
-          <div className="right-arrow-container">
+          <div 
+            onClick={() => handleIncrementQty()}
+            className="right-arrow-container">
             <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>

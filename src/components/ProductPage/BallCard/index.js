@@ -2,38 +2,52 @@ import { useContext, useRef } from "react"
 import CartContext from "../Context/cartContext"
 import "./styles.css"
 
-export default function BallCard({ src, title, price, id }) {
+export default function BallCard({ src, title, price }) {
   const cartContext = useContext(CartContext)
   const quantityInput = useRef()
   const image = useRef()
   const ballPrice = useRef()
+  const duplicate = useRef(false)
 
-  const handleCartUpdate = (e) => {
-    const ballId = id
-
+  const handleCartUpdate = () => {
     const cartItem = {
-      id: ballId,
+      title: title,
       imageSrc: image.current.src,
       price: ballPrice.current.innerText,
       qty: quantityInput.current.value,
     }
+    if (cartItem.qty === "") cartItem.qty = 1
 
-    cartContext.cartItems.forEach((item, index) => {
-      if (item.id === cartItem.id) {
-        const newItem = {
-          id: item.id,
-          imageSrc: item.imageSrc,
-          price: item.price,
-          qty: item.qty + 1,
-        }
-        // const cartItemsDuplicate = [...cartContext.cartItems]
-        const updatedCartItem = cartContext.cartItems.with(index, newItem)
-        cartContext.setCartItems(updatedCartItem)
-        return
+    if (cartContext.cartItems.length === 0) {
+      cartContext.setCartItems([
+        ...cartContext.cartItems, cartItem
+      ])
+
+    } else {
+        cartContext.cartItems.forEach((item, index) => {
+          if (item.title === cartItem.title) {
+            duplicate.current = true
+   
+            // update the cart item by increasing its qty
+            const newItem = {
+              title: item.title,
+              imageSrc: item.imageSrc,
+              price: item.price,
+              qty: parseInt(item.qty) + parseInt(quantityInput.current.value === "" ?
+                                         1 :
+                                        quantityInput.current.value),
+            }
+
+            const cartItemsDuplicate = [...cartContext.cartItems]
+            const updatedCartItem = cartItemsDuplicate.with(index, newItem)
+            cartContext.setCartItems(updatedCartItem)
+            return
+          }
+        })
+
+        if (duplicate.current === false)
+          cartContext.setCartItems([...cartContext.cartItems, cartItem])
       }
-    })
-
-    cartContext.setCartItems([...cartContext.cartItems, cartItem])
   }
 
   return (
@@ -51,6 +65,7 @@ export default function BallCard({ src, title, price, id }) {
       <div 
         className="input-price-container">
         <span 
+          className="price"
           ref={ballPrice}>
           ${price}
         </span>
@@ -58,11 +73,13 @@ export default function BallCard({ src, title, price, id }) {
           ref={quantityInput} 
           type="number" 
           min={1}
-          placeholder={0}
+          max={10}
+          placeholder={1}
         />
       </div>
       <button
-        onClick={(e) => handleCartUpdate(e)}>
+        className="make-basket-btn"
+        onClick={() => handleCartUpdate()}>
         Make the basket
       </button>
     </div>

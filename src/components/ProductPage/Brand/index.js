@@ -12,11 +12,10 @@ export default function BrandContainer({ brand, cards }) {
       <p className="brand-description">Check out our {brand} basketballs</p>
       <div className="ball-cards-container">
         {
-          cards.map(card => {
+          cards.map((card, index) => {
             return (
-              <BallCard 
+              <BallCard
                 key={uuidv4()}
-                id={uuidv4()}
                 src={card.src}
                 title={card.title}
                 price={card.price}
