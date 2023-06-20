@@ -42,4 +42,9 @@ h1 {
     grid-template-rows: repeat(3, 1fr);
     gap: 7.3%;
   }
+
+  .brand-description {
+    font-size: 14px;
+    color: var(--font-dark-dark);
+  }
 }

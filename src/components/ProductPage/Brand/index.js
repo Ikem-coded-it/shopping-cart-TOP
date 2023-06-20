@@ -16,6 +16,7 @@ export default function BrandContainer({ brand, cards }) {
             return (
               <BallCard 
                 key={uuidv4()}
+                id={uuidv4()}
                 src={card.src}
                 title={card.title}
                 price={card.price}

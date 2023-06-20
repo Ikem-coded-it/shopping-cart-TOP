@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   font-size: 20px;
+  font-weight: 500;
   gap: 10px;
   transition: transform .2s ease
 }
@@ -20,14 +21,27 @@
 }
 
 .input-price-container {
+  font-weight: normal;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
 }
 
 input {
   height: 25px;
   width: 20%;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  padding-left: 10px;
+  background-color: white;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1;
+  height: 20px;
+  width: 20px;
 }
 
 button {
