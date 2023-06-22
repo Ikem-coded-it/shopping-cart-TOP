@@ -52,6 +52,7 @@ export default function BallCard({ src, title, price }) {
 
   return (
     <div 
+      data-testid="ball-card"
       className="ball-card">
       <img 
         ref={image}
@@ -70,6 +71,8 @@ export default function BallCard({ src, title, price }) {
           ${price}
         </span>
         <input 
+          data-testid="qty-input"
+          name="quantity"
           ref={quantityInput} 
           type="number" 
           min={1}

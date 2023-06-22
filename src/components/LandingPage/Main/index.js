@@ -3,7 +3,7 @@ import "./styles.css"
 
 export default function Main() {
   return(
-    <div className="main-background">
+    <div data-testid="landing" className="main-background">
       <div className="write-up-container">
         <div className="write-up">
           <div className="welcome">Welcome</div>

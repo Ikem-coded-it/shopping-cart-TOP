@@ -21,7 +21,9 @@ export default function CardsDisplay() {
   }
 
   return (
-    <div className="card-display">
+    <div 
+      data-testid="cards-display"
+      className="card-display">
       <CartContext.Provider value={contextValues}>
         <Cart/>
         <BrandContainer 

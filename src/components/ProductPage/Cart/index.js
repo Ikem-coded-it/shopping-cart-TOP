@@ -19,13 +19,16 @@ export default function Cart () {
   }
 
   return (
-    <div className="cart">
+    <div 
+      className="cart">
 
       <div 
+        data-testid="cart-modal"
         ref={cartModalOpen} 
         className="shopping-cart-open"
         onClick={() => handleCartOpen()}>
         <div 
+          data-testid="count-display"
           className="count-display">
           {
             cartItemsDuplicate.reduce((prev, curr) => {
@@ -84,7 +87,7 @@ export default function Cart () {
   )
 }
 
-function CartItemCard ({ src, qty, price, title }) {
+export function CartItemCard ({ src, qty, price, title }) {
   const cartContext = useContext(CartContext)
 
   function handleIncrementQty () {

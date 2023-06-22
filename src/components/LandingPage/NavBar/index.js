@@ -4,7 +4,7 @@ import "./styles.css"
 
 function NavBar() {
   return (
-    <div className="nav-bar">
+    <div data-testid="navbar" className="nav-bar">
       <h1 className="logo">
         BallerStore
       </h1>
