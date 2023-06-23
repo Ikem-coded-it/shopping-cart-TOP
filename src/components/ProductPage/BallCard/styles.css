@@ -15,9 +15,14 @@
   transform: scale(1.05)
 }
 
-.ball-image {
+.blur-load {
   height: 60%;
   width: 60%;
+}
+
+.ball-image {
+  height: 100%;
+  width: 100%;
 }
 
 .input-price-container {
@@ -54,11 +59,6 @@ input[type=number]::-webkit-inner-spin-button {
     height: 180px;
     font-size: 17px;
     gap: 10px;
-  }
-
-  .ball-image {
-    height: 60%;
-    width: 60%;
   }
 
   .input-price-container {

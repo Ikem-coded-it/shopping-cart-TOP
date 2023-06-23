@@ -54,12 +54,15 @@ export default function BallCard({ src, title, price }) {
     <div 
       data-testid="ball-card"
       className="ball-card">
-      <img 
-        ref={image}
-        className="ball-image" 
-        src={src} 
-        alt="ball"
-      /> 
+      <div className="blur-load">
+        <img 
+          ref={image}
+          className="ball-image" 
+          src={src} 
+          alt="ball"
+          loading="lazy"
+        /> 
+      </div>
       <span>
         {title}
       </span>
