@@ -64,7 +64,8 @@ button {
 @media only screen and (max-width: 600px) {
   .main-background {
     justify-content: center;
-    background-image: url("../images/images\ \(9\).jpeg");
+    background-image: url("../images/images\ \(9\).jpeg"),
+      linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
   }
 
   .write-up-container {

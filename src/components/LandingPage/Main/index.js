@@ -11,7 +11,7 @@ export default function Main() {
           <div className="baller-store">BallerStore</div>
           <div className="para">Ready to take your game to the next level?</div>
         </div>
-        <Link className="link" to="/balls"><button>Get Some Balls</button></Link>
+        <Link className="link" to="/auth/login"><button>Get Some Balls</button></Link>
       </div>
     </div>
   )

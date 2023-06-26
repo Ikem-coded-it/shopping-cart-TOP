@@ -1,0 +1,86 @@
+.signup-form-container {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+}
+
+.signup-form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.firstname-container,
+.lastname-container,
+.confirm-password-container {
+  /* border: 1px solid green; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 15%;
+  align-items: center;
+}
+
+.email-container,
+.password-container {
+  gap: 2px;
+}
+
+.firstname-label,
+.lastname-label,
+.confirm-password-label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.firstname-input,
+.lastname-input,
+.confirm-password-input {
+  border: 1px solid var(--font-dark-light);
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 300;
+  font-size: 17px;
+  width: 60%;
+}
+
+@media only screen and (max-width: 600px) {
+  .signup-form {
+      width: 80%;
+      margin-top: 20px;
+    }
+
+    .email-label,
+    .password-label {
+      color: var(--font-dark-light);
+      font-weight: 400;
+    }
+  
+    .firstname-label,
+    .lastname-label,
+    .confirm-password-label {
+      font-size: 15px;
+      font-weight: 400;
+    }
+  
+    .firstname-input,
+    .lastname-input,
+    .confirm-password-input {
+      padding: 5px;
+      font-weight: 300;
+      font-size: 17px;
+      width: 80%;
+    }
+
+    .email-input,
+    .password-input {
+      width: 80%;
+    }
+
+    .ask-signup,
+    .signup-link {
+      color: var(--font-dark-light)
+    }
+}

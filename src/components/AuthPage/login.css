@@ -1,0 +1,131 @@
+.login {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  font-family: Geneva, Verdana, sans-serif;
+}
+
+.basketball-image {
+  width: 50%;
+  height: 100%;
+}
+
+.form-container {
+  width: 50%;
+  height: 100%;
+}
+
+.dunk-pic {
+  width: 100%;
+  height: 100%;
+}
+
+.login-form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.email-container,
+.password-container {
+  width: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 15%;
+  align-items: center;
+}
+
+.email-label,
+.password-label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.email-input,
+.password-input {
+  border: 1px solid var(--font-dark-light);
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 300;
+  font-size: 17px;
+  width: 60%;
+}
+
+.login-btn-container {
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.login-btn {
+  width: 50%;
+  height: 60%;
+}
+
+@media only screen and (max-width: 600px) {
+  .login {
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+      height: 90vh;
+    }
+  
+    .login>div {
+      width: 100%;
+    }
+
+    .basketball-image {
+      display: none;
+    }
+
+    .form-container {
+      height: 100%;
+      background-image: url("./assets/Basketball-rafiki.png"), 
+        linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
+      background-size: cover;
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-blend-mode: darken;
+    }
+
+    .login-form {
+      background-color: transparent;
+    }
+  
+    .email-label {
+      font-size: 15px;
+      color: var(--font-light-light);
+    }
+  
+    .password-label {
+      font-size: 15px;
+      color: var(--font-light-light);
+    }
+  
+    .login-btn-container {
+      height: 15%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ask-signup {
+      color: var(--font-light-light);
+    }
+
+    .signup-link {
+      color: var(--font-light-light);
+    }
+  
+    .login-btn {
+      width: 50%;
+      height: 60%;
+    }
+}
