@@ -2,7 +2,7 @@
   height: 80vh;
   width: 100%;
   display: flex;
-  font-family: Geneva, Verdana, sans-serif;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .basketball-image {
@@ -41,12 +41,12 @@
 .email-label,
 .password-label {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .email-input,
 .password-input {
-  border: 1px solid var(--font-dark-light);
+  border: 1px solid var(--border-color-orange);
   border-radius: 5px;
   padding: 5px;
   font-weight: 300;
@@ -97,14 +97,17 @@
       background-color: transparent;
     }
   
-    .email-label {
-      font-size: 15px;
+    .email-label,
+    .password-label{
+      font-size: 20px;
       color: var(--font-light-light);
+      font-weight: 700px;
+      font-family: 'Courier New', Courier, monospace;
     }
-  
-    .password-label {
-      font-size: 15px;
-      color: var(--font-light-light);
+
+    .email-input,
+    .password-input {
+      width: 80%;
     }
   
     .login-btn-container {

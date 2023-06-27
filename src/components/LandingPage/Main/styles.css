@@ -37,6 +37,7 @@
 
 .baller-store {
   font-size: 40px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .para {
@@ -66,6 +67,7 @@ button {
     justify-content: center;
     background-image: url("../images/images\ \(9\).jpeg"),
       linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
+    background-blend-mode: darken;
   }
 
   .write-up-container {

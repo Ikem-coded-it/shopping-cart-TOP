@@ -1,4 +1,5 @@
 import { useContext, useRef } from "react"
+import { Link } from "react-router-dom";
 import CartContext from "../Context/cartContext"
 import "./styles.css"
 
@@ -50,22 +51,26 @@ export default function BallCard({ src, title, price }) {
       }
   }
 
+  const ballPageLink = `/balls/${title}`;
+
   return (
     <div 
       data-testid="ball-card"
       className="ball-card">
-      <div className="blur-load">
-        <img 
-          ref={image}
-          className="ball-image" 
-          src={src} 
-          alt="ball"
-          loading="lazy"
-        /> 
-      </div>
-      <span>
-        {title}
-      </span>
+      <img 
+        ref={image}
+        className="ball-image" 
+        src={src} 
+        alt="ball"
+        loading="lazy"
+      /> 
+      <Link 
+        id="ballcard-link"
+        to="/balls/ball">
+        <span>
+          {title}
+        </span>
+      </Link>
       <div 
         className="input-price-container">
         <span 

@@ -1,8 +1,14 @@
 import dunkSVG from "./assets/Basketball-pana.svg";
 import { Link } from "react-router-dom";
+import { firebaseSignIn } from "../../firebase/authControllers";
 import "./login.css";
 
 export default function Login () {
+  function handleSubmit(e) {
+    e.preventDefault()
+    firebaseSignIn(e.target)
+  }
+
   return (
     <div 
       className="login">
@@ -19,6 +25,7 @@ export default function Login () {
 
       <div className="form-container">
         <form 
+          onSubmit={(e) => handleSubmit(e)}
           className="login-form">
 
           <div 

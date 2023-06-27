@@ -6,6 +6,8 @@ import BallsPage from "../Pages/BallsPage";
 import ContactsPage from "../Pages/ContactPage";
 import LoginPage from "../Pages/LoginPage";
 import SignupPage from "../Pages/SignupPage";
+import BallPage from "../Pages/BallPage";
+import AdminPage from "../Pages/AdminPage";
 import './App.css';
 
 export default function App() {
@@ -14,10 +16,19 @@ export default function App() {
     <NavBar />
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/balls" element={<BallsPage />} />
+      <Route path="/admin" element={<AdminPage />} />
+
+      <Route path="/balls">
+        <Route index element={<BallsPage />} />
+        <Route path="ball" element={<BallPage />} />
+      </Route>
+
+      <Route path="/auth">
+        <Route path="login" element={<LoginPage />} />
+        <Route path="signup" element={<SignupPage />} />
+      </Route>
+
       <Route path="/contacts" element={<ContactsPage />} />
-      <Route path="/auth/login" element={<LoginPage />} />
-      <Route path="/auth/signup" element={<SignupPage />} />
     </Routes>
     <Footer />
     </>

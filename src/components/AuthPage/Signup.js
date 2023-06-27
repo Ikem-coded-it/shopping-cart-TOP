@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom"
+import { firebaseSignUp } from "../../firebase/authControllers"
 import "./signup.css" // email password and button container use styles from login.css
 
 export default function Signup() {
+
+  function handleSubmit (e) {
+    e.preventDefault()
+    firebaseSignUp(e.target)
+  }
+
   return (
     <div className="signup-form-container">
       <form 
+        onSubmit={(e) => handleSubmit(e)}
         className="signup-form">
         <div 
           className="firstname-container">
@@ -71,13 +79,13 @@ export default function Signup() {
           className="confirm-password-container">
           <label 
             className="confirm-password-label"
-            htmlFor="confirm-password">
+            htmlFor="confirmpassword">
             Confirm password
           </label>
           <input 
             className="confirm-password-input"
             type="password" 
-            name="confirm-password" 
+            name="confirmpassword" 
             minLength={8} 
             required
           />

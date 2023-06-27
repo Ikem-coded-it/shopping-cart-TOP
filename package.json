@@ -12,6 +12,7 @@
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-lorem-ipsum": "^1.4.10",
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
     "uuidv4": "^6.2.13",

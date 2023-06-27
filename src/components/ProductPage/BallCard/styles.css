@@ -15,14 +15,14 @@
   transform: scale(1.05)
 }
 
-.blur-load {
+.ball-image {
   height: 60%;
   width: 60%;
 }
 
-.ball-image {
-  height: 100%;
-  width: 100%;
+#ballcard-link {
+  text-decoration: none;
+  color: var(--main-color);
 }
 
 .input-price-container {
