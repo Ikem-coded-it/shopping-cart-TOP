@@ -1,10 +1,10 @@
 import BrandContainer from "../Brand"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { 
-  spaldingBalls,
-  wilsonBalls,
-  moltenBalls
-} from "../images/index"
+  fetchAllSpaldingBalls,
+  fetchAllWilsonBalls,
+  fetchAllMoltenBalls,
+} from "../../../firebase/controllers/dbController";
 import Cart from "../Cart"
 import CartContext from "../Context/cartContext"
 import "./styles.css"
@@ -12,6 +12,21 @@ import "./styles.css"
 export default function CardsDisplay() {
   const [cartItems, setCartItems] = useState([])
   const [cartNumber, setCartNumber] = useState(0)
+  const [spaldingBalls, setSpaldingBalls] = useState([])
+  const [wilsonBalls, setWilsonBalls] = useState([])
+  const [moltenBalls, setMoltenBalls] = useState([])
+
+  useEffect(() => {
+     
+    async function setBalls () {
+      setSpaldingBalls([...spaldingBalls].concat(await fetchAllSpaldingBalls()))
+      setWilsonBalls([...wilsonBalls].concat(await fetchAllWilsonBalls()))
+      setMoltenBalls([...moltenBalls].concat(await fetchAllMoltenBalls()))
+    }
+
+    setBalls()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const contextValues = {
     cartNumber: cartNumber,

@@ -1,6 +1,6 @@
 import dunkSVG from "./assets/Basketball-pana.svg";
 import { Link } from "react-router-dom";
-import { firebaseSignIn } from "../../firebase/authControllers";
+import { firebaseSignIn } from "../../firebase/controllers/authControllers";
 import "./login.css";
 
 export default function Login () {

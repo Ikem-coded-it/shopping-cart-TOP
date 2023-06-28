@@ -1,6 +1,12 @@
-.ball-upload-form {
+.admin-upload {
   height: 80vh;
-  width: 50vw;
+  width: 100%;
+  display: flex;
+}
+
+.ball-upload-form {
+  height: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,4 +41,11 @@
   box-sizing: border-box;
   padding: 5px;
   border-radius: 10px;
+}
+
+.result-display {
+  width: 50%;
+  height: 100%;
+  color: green;
+  font-size: 60px;
 }

@@ -4,7 +4,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { auth } from "./config";
+import { auth } from "../config";
 
 const validateSignUpForm = (form) => {
   const firstName = form.firtname.value;

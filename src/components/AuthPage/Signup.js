@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { firebaseSignUp } from "../../firebase/authControllers"
+import { firebaseSignUp } from "../../firebase/controllers/authControllers"
 import "./signup.css" // email password and button container use styles from login.css
 
 export default function Signup() {

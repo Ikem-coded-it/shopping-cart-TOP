@@ -10,7 +10,7 @@ import {
   uploadToSpalding,
   uploadToWilson,
   uploadToMolten,
-} from "../../firebase/dbController";
+} from "../../firebase/controllers/dbController";
 
 import "./styles.css"
 
@@ -42,23 +42,23 @@ export default function Admin () {
       src: url,
     }
 
-    let uploadedBall;
     const ballName = ball.title.split("0")[0]
     switch(ballName) {
       case "Spalding":
-        uploadedBall = await uploadToSpalding(ball)
+        await uploadToSpalding(ball)
         break;
       case "Wilson":
-        uploadedBall = await uploadToWilson(ball)
+        await uploadToWilson(ball)
         break;
       default:
-        uploadedBall = await uploadToMolten(ball)
+        await uploadToMolten(ball)
     }
-    console.log(uploadedBall)
+    result.current.innerText = "Uploaded successfully"
   };
 
   return (
-    <>
+    <div
+      className="admin-upload">
       <form 
         onSubmit={(e) => handleUpload(e)}
         className="ball-upload-form">
@@ -100,7 +100,10 @@ export default function Admin () {
           <button className="upload-btn">Upload</button>
         </div>
       </form>
-      <div ref={result}></div>
-    </>
+      <div 
+        className="result-display"
+        ref={result}>
+        </div>
+    </div>
   )
 }
