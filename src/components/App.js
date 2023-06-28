@@ -8,6 +8,7 @@ import LoginPage from "../Pages/LoginPage";
 import SignupPage from "../Pages/SignupPage";
 import BallPage from "../Pages/BallPage";
 import AdminPage from "../Pages/AdminPage";
+import { observeAuth } from "../firebase/authControllers";
 import './App.css';
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
       <Route path="/admin" element={<AdminPage />} />
 
       <Route path="/balls">
-        <Route index element={<BallsPage />} />
+        <Route index element={<BallsPage />} onEnter={() => observeAuth()} />
         <Route path="ball" element={<BallPage />} />
       </Route>
 

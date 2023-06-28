@@ -1,30 +1,106 @@
+import { useState, useRef } from "react";
+import { storage } from "../../firebase/config";
+import { 
+  ref, 
+  uploadBytes, 
+  getDownloadURL  
+} from "firebase/storage";
+
+import {
+  uploadToSpalding,
+  uploadToWilson,
+  uploadToMolten,
+} from "../../firebase/dbController";
+
 import "./styles.css"
 
 export default function Admin () {
+  const [imageUpload, setImageUpload] = useState(null);
+  const result = useRef()
+ 
+   const handleUpload = async (e) => {
+    e.preventDefault()
+    if (imageUpload == null) return;
+
+    let imageRef;
+
+    if (imageUpload.name.startsWith("spa")) {
+      imageRef = ref(storage, `balls/spalding/${imageUpload.name}`);
+    } else if (imageUpload.name.startsWith("wil")) {
+      imageRef = ref(storage, `balls/wilson/${imageUpload.name}`);
+    } else {
+      imageRef = ref(storage, `balls/molten/${imageUpload.name}`);
+    }
+
+    const snapshot = await uploadBytes(imageRef, imageUpload)
+    const url = await getDownloadURL(snapshot.ref)
+     
+    const ball = {
+      title: e.target.title.value,
+      description: e.target.description.value,
+      price: e.target.price.value,
+      src: url,
+    }
+
+    let uploadedBall;
+    const ballName = ball.title.split("0")[0]
+    switch(ballName) {
+      case "Spalding":
+        uploadedBall = await uploadToSpalding(ball)
+        break;
+      case "Wilson":
+        uploadedBall = await uploadToWilson(ball)
+        break;
+      default:
+        uploadedBall = await uploadToMolten(ball)
+    }
+    console.log(uploadedBall)
+  };
+
   return (
     <>
-      <form className="ball-upload-form">
+      <form 
+        onSubmit={(e) => handleUpload(e)}
+        className="ball-upload-form">
         <div 
           className="title-container">
-            <input className="ball-upload-input" placeholder="title" />
+            <input 
+              name="title"
+              className="upload-ball-title-input" 
+              placeholder="title" />
         </div>
         <div 
           className="description-container">
-            <textarea placeholder="description"></textarea>
+            <textarea 
+              className="upload-ball-description-input"
+              name="description"
+              placeholder="description">
+            </textarea>
         </div>
         <div 
           className="price-container">
-            <input className="ball-upload-input" type="number" placeholder="0" />
+            <input 
+              name="price"
+              className="upload-ball-price-input" 
+              type="number" 
+              placeholder="0" 
+            />
         </div>
         <div 
           className="image-container">
-            <input className="ball-upload-input" type="file" />
+            <input
+              className="upload-ball-image-input" 
+              type="file" 
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }} />
         </div>
         <div
           className="upload-btn-container">
           <button className="upload-btn">Upload</button>
         </div>
       </form>
+      <div ref={result}></div>
     </>
   )
 }
