@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CartContext from "../Context/cartContext"
 import "./styles.css"
 
-export default function BallCard({ src, title, price }) {
+export default function BallCard({ src, title, price, ballId }) {
   const cartContext = useContext(CartContext)
   const quantityInput = useRef()
   const image = useRef()
@@ -51,7 +51,7 @@ export default function BallCard({ src, title, price }) {
       }
   }
 
-  const ballPageLink = `/balls/${title}`;
+  const ballPageLink = `/balls/${title}/${ballId}`;
 
   return (
     <div 
@@ -66,7 +66,7 @@ export default function BallCard({ src, title, price }) {
       /> 
       <Link 
         id="ballcard-link"
-        to="/balls/ball">
+        to={ballPageLink}>
         <span>
           {title}
         </span>

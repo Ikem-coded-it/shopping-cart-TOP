@@ -1,11 +1,32 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { LoremIpsum } from 'react-lorem-ipsum';
+import { 
+  useRef, 
+  useEffect, 
+  useState,
+} from "react";
+import { fetchSingleBall } from "../../firebase/controllers/dbController";
+import { Link, useParams } from "react-router-dom";
 import image from "../ProductPage/images/spalding/96500475e5b6afc0ffb0628da646a820.jpg"
 import "./styles.css"
 
-export default function Ball ({ src, title, description, price }) {
+export default function Ball () {
   const qtyInput = useRef()
+  const params = useParams()
+  const [ball, setBall] = useState(null)
+
+  useEffect(() => {
+    const getAndSetBall = async () => {
+      if (params.title.startsWith("Spa")) {
+        setBall(await fetchSingleBall("spalding", params.id))
+      } else if (params.title.startsWith("Wil")) {
+        setBall(await fetchSingleBall("wilson", params.id))
+      } else {
+        setBall(await fetchSingleBall("molten", params.id))
+      }
+    }
+    
+    console.log("fetching...")
+    getAndSetBall()
+  }, [])
 
   const handleDecrementQty = () => {
     if (qtyInput.current.value <= 1) return
@@ -37,7 +58,7 @@ export default function Ball ({ src, title, description, price }) {
           </div>
           <img
           className="ball-ball-image"
-          src={image}
+          src={ball && ball.src}
           alt="ball"
           loading="lazy"
           />
@@ -47,7 +68,7 @@ export default function Ball ({ src, title, description, price }) {
           className="info-container">
           <div 
             className="ball-title-container">
-            <h1 className="ball-title">Spalding</h1>
+            <h1 className="ball-title">{ball && ball.title}</h1>
             <div className="rating-container">
               <i className="fa-regular fa-heart"></i>
               <i className="fa-regular fa-heart"></i>
@@ -59,13 +80,12 @@ export default function Ball ({ src, title, description, price }) {
           <div 
             className="description-container">
             <p>
-              This is a really nice ball and it is really bouncy. You're guaranteed 
-              to make a 100% of your 3 pointers. Trust me.
+              {ball && ball.description}
             </p>
           </div>
           <div
             className="price-container">
-            $100
+            ${ball && ball.price}
           </div>
           <div
             className="purchase-section">

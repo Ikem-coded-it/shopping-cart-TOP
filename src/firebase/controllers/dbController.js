@@ -1,4 +1,4 @@
-import { doc, setDoc, getDocs, collection } from "firebase/firestore"; 
+import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore"; 
 import { db } from "../config";
 import { v4 as uuidv4 } from "uuid";
 
@@ -21,8 +21,9 @@ const fetchAllSpaldingBalls = async() => {
     const fetchedSpaldingBalls = []
     const querySnapshot = await getDocs(collection(db, "products/balls/spalding"));
     querySnapshot.forEach((doc) => {
+      const id = doc.id
       const data = doc.data()
-      fetchedSpaldingBalls.push(data)
+      fetchedSpaldingBalls.push({id, data})
     });
     return fetchedSpaldingBalls;
   } catch (error) {
@@ -49,8 +50,9 @@ const fetchAllWilsonBalls = async() => {
     const fetchedWilsonBalls = []
     const querySnapshot = await getDocs(collection(db, "products/balls/wilson"));
     querySnapshot.forEach((doc) => {
+      const id = doc.id
       const data = doc.data()
-      fetchedWilsonBalls.push(data)
+      fetchedWilsonBalls.push({id, data})
     });
     return fetchedWilsonBalls;
   } catch (error) {
@@ -77,10 +79,28 @@ const fetchAllMoltenBalls = async() => {
     const fetchedMoltenBalls = []
     const querySnapshot = await getDocs(collection(db, "products/balls/molten"));
     querySnapshot.forEach((doc) => {
+      const id = doc.id
       const data = doc.data()
-      fetchedMoltenBalls.push(data)
+      fetchedMoltenBalls.push({id, data})
     });
     return fetchedMoltenBalls;
+  } catch (error) {
+    alert(error.message)
+  }
+}
+
+const fetchSingleBall = async (collection, ballId) => {
+  try {
+    const docRef = doc(db, `products/balls/${collection}`, ballId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      console.log(data)
+      return data
+    } else {
+      alert("Ball does not exist");
+    }
   } catch (error) {
     alert(error.message)
   }
@@ -93,4 +113,5 @@ export {
   fetchAllSpaldingBalls,
   fetchAllWilsonBalls,
   fetchAllMoltenBalls,
+  fetchSingleBall,
 }

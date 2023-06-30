@@ -20,7 +20,7 @@ export default function App() {
 
       <Route path="/balls">
         <Route index element={<BallsPage />} />
-        <Route path="ball" element={<BallPage />} />
+        <Route path=":title/:id" element={<BallPage />} />
       </Route>
 
       <Route path="/auth">
