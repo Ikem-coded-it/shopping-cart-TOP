@@ -3,8 +3,7 @@ import {
   setDoc, 
   getDoc, 
   getDocs, 
-  collection, 
-  updateDoc  
+  collection,
 } from "firebase/firestore"; 
 import { db } from "../config";
 import { v4 as uuidv4 } from "uuid";

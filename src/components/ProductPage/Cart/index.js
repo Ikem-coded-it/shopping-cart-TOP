@@ -124,6 +124,7 @@ export function CartItemCard ({ src, qty, price, title }) {
   }
 
   async function handleRemoveCartItem () {
+    // eslint-disable-next-line array-callback-return
     const filteredCart = cartContext.cartItems.filter(item => {
       if (item.title !== title) return item
     })
