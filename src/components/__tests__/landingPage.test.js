@@ -78,6 +78,7 @@ describe("footer tests", () => {
 
   test("check if tag shows", () => {
     render(<MemoryRouter><Footer /></MemoryRouter>)
+    // eslint-disable-next-line no-useless-escape
     const tag = screen.getByText(/ikem\-coded\-it 2023/i)
     expect(tag).toBeInTheDocument()
   })
