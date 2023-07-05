@@ -1,4 +1,11 @@
-import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore"; 
+import { 
+  doc, 
+  setDoc, 
+  getDoc, 
+  getDocs, 
+  collection, 
+  updateDoc  
+} from "firebase/firestore"; 
 import { db } from "../config";
 import { v4 as uuidv4 } from "uuid";
 
@@ -96,10 +103,35 @@ const fetchSingleBall = async (collection, ballId) => {
 
     if (docSnap.exists()) {
       const data = docSnap.data();
-      console.log(data)
       return data
     } else {
       alert("Ball does not exist");
+    }
+  } catch (error) {
+    alert(error.message)
+  }
+}
+
+const updateCart = async (newCart, id) => {
+  try {
+    await setDoc(doc(db, "carts", id), {
+      cart: newCart
+    });
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+const getCart = async (id) => {
+   try {
+    const docRef = doc(db, `carts`, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data;
+    } else {
+      alert("Cart does not exist");
     }
   } catch (error) {
     alert(error.message)
@@ -114,4 +146,6 @@ export {
   fetchAllWilsonBalls,
   fetchAllMoltenBalls,
   fetchSingleBall,
+  updateCart,
+  getCart,
 }

@@ -1,16 +1,19 @@
 import { useContext, useRef } from "react"
 import { Link } from "react-router-dom";
 import CartContext from "../Context/cartContext"
+import { AuthContext } from "../../App";
+import { updateCart } from "../../../firebase/controllers/dbController";
 import "./styles.css"
 
 export default function BallCard({ src, title, price, ballId }) {
   const cartContext = useContext(CartContext)
+  const authContext = useContext(AuthContext)
   const quantityInput = useRef()
   const image = useRef()
   const ballPrice = useRef()
   const duplicate = useRef(false)
 
-  const handleCartUpdate = () => {
+  const handleCartUpdate = async() => {
     const cartItem = {
       title: title,
       imageSrc: image.current.src,
@@ -24,31 +27,40 @@ export default function BallCard({ src, title, price, ballId }) {
         ...cartContext.cartItems, cartItem
       ])
 
+      // save cart to db
+      const user = authContext.loggedInUser
+      await updateCart([cartItem], user.uid)
+
     } else {
-        cartContext.cartItems.forEach((item, index) => {
-          if (item.title === cartItem.title) {
-            duplicate.current = true
-   
-            // update the cart item by increasing its qty
-            const newItem = {
-              title: item.title,
-              imageSrc: item.imageSrc,
-              price: item.price,
-              qty: parseInt(item.qty) + parseInt(quantityInput.current.value === "" ?
-                                         1 :
-                                        quantityInput.current.value),
-            }
-
-            const cartItemsDuplicate = [...cartContext.cartItems]
-            const updatedCartItem = cartItemsDuplicate.with(index, newItem)
-            cartContext.setCartItems(updatedCartItem)
-            return
+      const {uid} = authContext.loggedInUser;
+      cartContext.cartItems.forEach(async(item, index) => {
+        if (item.title === cartItem.title) {
+          duplicate.current = true
+  
+          // update the cart item by increasing its qty
+          const newItem = {
+            title: item.title,
+            imageSrc: item.imageSrc,
+            price: item.price,
+            qty: parseInt(item.qty) + parseInt(quantityInput.current.value === "" ?
+                                        1 :
+                                      quantityInput.current.value),
           }
-        })
 
-        if (duplicate.current === false)
-          cartContext.setCartItems([...cartContext.cartItems, cartItem])
+          const cartItemsDuplicate = [...cartContext.cartItems]
+          const updatedCartItem = cartItemsDuplicate.with(index, newItem)
+          cartContext.setCartItems(updatedCartItem)
+
+          // update in db
+          await updateCart(updatedCartItem, uid)
+        }
+      })
+
+      if (duplicate.current === false) {
+        cartContext.setCartItems([...cartContext.cartItems, cartItem])
+        await updateCart([...cartContext.cartItems, cartItem], uid)
       }
+    }
   }
 
   const ballPageLink = `/balls/${title}/${ballId}`;

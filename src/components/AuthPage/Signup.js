@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { firebaseSignUp } from "../../firebase/controllers/authControllers"
 import "./signup.css" // email password and button container use styles from login.css
 
 export default function Signup() {
-
+  const navigate = useNavigate()
   function handleSubmit (e) {
     e.preventDefault()
     firebaseSignUp(e.target)
+    navigate("/auth/login")
   }
 
   return (

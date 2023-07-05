@@ -1,7 +1,9 @@
 import { useRef, useContext } from "react";
 import CartContext from "../Context/cartContext";
+import { AuthContext } from "../../App";
 import {v4 as uuidv4} from "uuid";
 import "./styles.css";
+import { updateCart } from "../../../firebase/controllers/dbController";
 
 export default function Cart () {
   const cartModal = useRef()
@@ -31,7 +33,9 @@ export default function Cart () {
           data-testid="count-display"
           className="count-display">
           {
-            cartItemsDuplicate.reduce((prev, curr) => {
+            cartItemsDuplicate.length &&
+             cartItemsDuplicate.reduce(
+              (prev, curr) => {
               return parseInt(curr.qty) + parseInt(prev)
             }, 0)
           }
@@ -51,7 +55,8 @@ export default function Cart () {
           <div 
             className="cart-items-display">
             {
-              cartContext.cartItems.map(cartItem => {
+              cartItemsDuplicate.length && 
+              cartItemsDuplicate.map(cartItem => {
                 return (
                   <CartItemCard
                     key={uuidv4()}
@@ -69,7 +74,9 @@ export default function Cart () {
             <div 
               className="total-price-display">
               Total: ${
-                cartItemsDuplicate.reduce((prev, curr) => {
+                cartItemsDuplicate.length &&
+                 cartItemsDuplicate.reduce(
+                  (prev, curr) => {
                   const priceNumber = curr.price.split("$")[1]
                   return prev + (priceNumber * curr.qty)
                 }, 0)
@@ -89,8 +96,10 @@ export default function Cart () {
 
 export function CartItemCard ({ src, qty, price, title }) {
   const cartContext = useContext(CartContext)
+  const authContext = useContext(AuthContext)
+  const { uid } = authContext.loggedInUser;
 
-  function handleIncrementQty () {
+  async function handleIncrementQty () {
     const cartItems = [...cartContext.cartItems]
     cartItems.forEach(item => {
       if (title === item.title) {
@@ -99,9 +108,10 @@ export function CartItemCard ({ src, qty, price, title }) {
       }
     })
     cartContext.setCartItems(cartItems)
+    await updateCart(cartItems, uid)
   }
 
-  function handleDecrementQty () {
+  async function handleDecrementQty () {
     const cartItems = [...cartContext.cartItems]
     cartItems.forEach(item => {
       if (title === item.title) {
@@ -110,13 +120,15 @@ export function CartItemCard ({ src, qty, price, title }) {
       }
     })
     cartContext.setCartItems(cartItems)
+    await updateCart(cartItems, uid)
   }
 
-  function handleRemoveCartItem () {
+  async function handleRemoveCartItem () {
     const filteredCart = cartContext.cartItems.filter(item => {
       if (item.title !== title) return item
     })
     cartContext.setCartItems(filteredCart)
+    await updateCart(filteredCart, uid)
   }
 
   return (

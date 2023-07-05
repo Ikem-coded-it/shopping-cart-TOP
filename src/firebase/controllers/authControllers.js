@@ -1,13 +1,14 @@
 import { 
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
 } from "firebase/auth";
+import { doc, setDoc, collection } from "firebase/firestore"; 
+import { db } from "../config";
 
 import { auth } from "../config";
 
 const validateSignUpForm = (form) => {
-  const firstName = form.firtname.value;
+  const firstName = form.firstname.value;
   const lastName = form.lastname.value;
   const email = form.email.value;
   const password = form.password.value;
@@ -41,8 +42,11 @@ const firebaseSignUp = (form) => {
   const password = form.password.value;
  
   createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
+  .then(async (userCredential) => {
     const user = userCredential.user;
+
+    // create empty cart for user
+    await setDoc(doc(db, "carts", user.uid), {cart: []});
     console.log("User created: ", user)
   })
   .catch((error) => {
@@ -61,7 +65,7 @@ const firebaseSignIn = (form) => {
    signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     const user = userCredential.user;
-    console.log("User signed in: ", user)
+    return user;
   })
   .catch((error) => {
     if (error.code === "auth/wrong-password")
@@ -70,23 +74,14 @@ const firebaseSignIn = (form) => {
   });
 }
 
-const observeAuth = () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      console.log(user.uid);
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log("here");
-    }
-  });
+const firebaseSignOut = () => {
+  auth.signOut().then(() => {
+    console.log("User signed out")
+  })
 }
 
 export {
   firebaseSignUp,
   firebaseSignIn,
-  observeAuth,
+  firebaseSignOut,
 }

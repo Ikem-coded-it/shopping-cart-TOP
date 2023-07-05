@@ -23,8 +23,6 @@ export default function Ball () {
         setBall(await fetchSingleBall("molten", params.id))
       }
     }
-    
-    console.log("fetching...")
     getAndSetBall()
   }, [])
 

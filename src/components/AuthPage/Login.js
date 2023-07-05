@@ -1,12 +1,19 @@
 import dunkSVG from "./assets/Basketball-pana.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { firebaseSignIn } from "../../firebase/controllers/authControllers";
+import { AuthContext } from "../App";
+import { useContext } from "react";
 import "./login.css";
 
 export default function Login () {
+  const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+
   function handleSubmit(e) {
     e.preventDefault()
-    firebaseSignIn(e.target)
+    const user = firebaseSignIn(e.target)
+    authContext.setLoggedInUser(user);
+    navigate("/balls")
   }
 
   return (
