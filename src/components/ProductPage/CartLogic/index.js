@@ -53,27 +53,11 @@
     }
 
     case "decreased_qty": {
-      const cart = [...cartItems]
-      cart.forEach(item => {
-        if (action.title === item.title) {
-          if (item.qty <= 1) return
-          item.qty--
-        }
-      })
-      return cart
+      return action.cart
     }
 
     case "increased_qty": {
-      const cart = [...cartItems]
-      console.log(cart)
-      cart.forEach(item => {
-        if (action.title === item.title) {
-          if (item.qty >= 10) return
-          item.qty++
-        }
-      })
-      console.log(cart)
-      return cart
+      return action.cart
     }
 
     default:

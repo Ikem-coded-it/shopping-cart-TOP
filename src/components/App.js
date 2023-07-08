@@ -46,7 +46,6 @@ export default function App() {
       if (loggedInUser !== null) {
         const {uid} = loggedInUser;
         const { cart } = await getCart(uid)
-        console.log(cart)
         dispatch({type: "added", cart})
       }
     }

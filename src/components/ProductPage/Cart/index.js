@@ -1,13 +1,7 @@
-import { 
-  useRef, 
-  useContext, 
-  useEffect 
-} from "react";
+import { useRef, useContext } from "react";
 import CartContext from "../CartLogic/cartContext";
-import { AuthContext } from "../../App";
 import {v4 as uuidv4} from "uuid";
 import "./styles.css";
-import { updateCart } from "../../../firebase/controllers/dbController";
 
 export default function Cart () {
   const cartModal = useRef()
@@ -100,32 +94,27 @@ export default function Cart () {
 
 export function CartItemCard ({ src, qty, price, title }) {
   const cartContext = useContext(CartContext)
-  const authContext = useContext(AuthContext)
-  const { uid } = authContext.loggedInUser;
-
-  useEffect(() => {
-    updateCart(cartContext.cartItems, uid);
-  }, 
-  [
-    cartContext.cartItems, 
-    uid
-  ]
-  );
 
   async function handleIncrementQty () {
-    cartContext.cartDispatch({
-      type: "increased_qty",
-      cart: [...cartContext.cartItems],
-      title,
+    const cart = [...cartContext.cartItems]
+    cart.forEach(item => {
+      if (item.title === title) {
+        if (item.qty >= 10) return
+        item.qty++
+      }
     })
+    cartContext.cartDispatch({type: "increased_qty", cart})
   }
 
   async function handleDecrementQty () {
-    cartContext.cartDispatch({
-      type: "decreased_qty",
-      cart: [...cartContext.cartItems],
-      title,
+    const cart = [...cartContext.cartItems]
+    cart.forEach(item => {
+      if (item.title === title) {
+        if (item.qty <= 1) return
+        item.qty--
+      }
     })
+    cartContext.cartDispatch({type: "decreased_qty", cart})
   }
 
   async function handleRemoveCartItem () {
@@ -156,7 +145,7 @@ export function CartItemCard ({ src, qty, price, title }) {
         <div 
           className="control">
           <div 
-            onClick={() => handleDecrementQty()}
+            onClick={handleDecrementQty}
             className="left-arrow-container">
             <i className="fa-solid fa-arrow-left"></i>
           </div>
@@ -164,7 +153,7 @@ export function CartItemCard ({ src, qty, price, title }) {
             {qty}
           </div>
           <div 
-            onClick={() => handleIncrementQty()}
+            onClick={handleIncrementQty}
             className="right-arrow-container">
             <i className="fa-solid fa-arrow-right"></i>
           </div>
