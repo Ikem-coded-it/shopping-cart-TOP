@@ -1,6 +1,10 @@
-import { useContext, useRef } from "react"
+import { 
+  useContext, 
+  useRef, 
+  useEffect 
+} from "react"
 import { Link } from "react-router-dom";
-import CartContext from "../Context/cartContext"
+import CartContext from "../CartLogic/cartContext"
 import { AuthContext } from "../../App";
 import { updateCart } from "../../../firebase/controllers/dbController";
 import "./styles.css"
@@ -11,56 +15,23 @@ export default function BallCard({ src, title, price, ballId }) {
   const quantityInput = useRef()
   const image = useRef()
   const ballPrice = useRef()
-  const duplicate = useRef(false)
+
+   useEffect(() => {
+      const { uid } = authContext.loggedInUser;
+      updateCart(cartContext.cartItems, uid);
+    }, [cartContext.cartItems, authContext.loggedInUser]);
 
   const handleCartUpdate = async() => {
-    const cartItem = {
+    const action = {
+      type: "added",
       title: title,
       imageSrc: image.current.src,
       price: ballPrice.current.innerText,
       qty: quantityInput.current.value,
+      qtyInput: quantityInput.current,
     }
-    if (cartItem.qty === "") cartItem.qty = 1
-
-    if (cartContext.cartItems.length === 0) {
-      cartContext.setCartItems([
-        ...cartContext.cartItems, cartItem
-      ])
-
-      // save cart to db
-      const user = authContext.loggedInUser
-      await updateCart([cartItem], user.uid)
-
-    } else {
-      const {uid} = authContext.loggedInUser;
-      cartContext.cartItems.forEach(async(item, index) => {
-        if (item.title === cartItem.title) {
-          duplicate.current = true
-  
-          // update the cart item by increasing its qty
-          const newItem = {
-            title: item.title,
-            imageSrc: item.imageSrc,
-            price: item.price,
-            qty: parseInt(item.qty) + parseInt(quantityInput.current.value === "" ?
-                                        1 :
-                                      quantityInput.current.value),
-          }
-
-          const cartItemsDuplicate = [...cartContext.cartItems]
-          const updatedCartItem = cartItemsDuplicate.with(index, newItem)
-          cartContext.setCartItems(updatedCartItem)
-
-          // update in db
-          await updateCart(updatedCartItem, uid)
-        }
-      })
-
-      if (duplicate.current === false) {
-        cartContext.setCartItems([...cartContext.cartItems, cartItem])
-        await updateCart([...cartContext.cartItems, cartItem], uid)
-      }
-    }
+    if (action.qty === "") action.qty = 1
+    cartContext.cartDispatch(action)
   }
 
   const ballPageLink = `/balls/${title}/${ballId}`;

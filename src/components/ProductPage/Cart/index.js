@@ -1,5 +1,9 @@
-import { useRef, useContext } from "react";
-import CartContext from "../Context/cartContext";
+import { 
+  useRef, 
+  useContext, 
+  useEffect 
+} from "react";
+import CartContext from "../CartLogic/cartContext";
 import { AuthContext } from "../../App";
 import {v4 as uuidv4} from "uuid";
 import "./styles.css";
@@ -99,37 +103,37 @@ export function CartItemCard ({ src, qty, price, title }) {
   const authContext = useContext(AuthContext)
   const { uid } = authContext.loggedInUser;
 
+  useEffect(() => {
+    updateCart(cartContext.cartItems, uid);
+  }, 
+  [
+    cartContext.cartItems, 
+    uid
+  ]
+  );
+
   async function handleIncrementQty () {
-    const cartItems = [...cartContext.cartItems]
-    cartItems.forEach(item => {
-      if (title === item.title) {
-        if (item.qty >= 10) return
-        item.qty++
-      }
+    cartContext.cartDispatch({
+      type: "increased_qty",
+      cart: [...cartContext.cartItems],
+      title,
     })
-    cartContext.setCartItems(cartItems)
-    await updateCart(cartItems, uid)
   }
 
   async function handleDecrementQty () {
-    const cartItems = [...cartContext.cartItems]
-    cartItems.forEach(item => {
-      if (title === item.title) {
-        if (item.qty <= 1) return
-        item.qty--
-      }
+    cartContext.cartDispatch({
+      type: "decreased_qty",
+      cart: [...cartContext.cartItems],
+      title,
     })
-    cartContext.setCartItems(cartItems)
-    await updateCart(cartItems, uid)
   }
 
   async function handleRemoveCartItem () {
-    // eslint-disable-next-line array-callback-return
-    const filteredCart = cartContext.cartItems.filter(item => {
-      if (item.title !== title) return item
+    cartContext.cartDispatch({
+      type: "removed", 
+      cart: cartContext.cartItems,
+      title,
     })
-    cartContext.setCartItems(filteredCart)
-    await updateCart(filteredCart, uid)
   }
 
   return (

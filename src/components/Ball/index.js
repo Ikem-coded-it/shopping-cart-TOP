@@ -2,16 +2,20 @@ import {
   useRef, 
   useEffect, 
   useState,
+  useContext,
 } from "react";
 import { fetchSingleBall } from "../../firebase/controllers/dbController";
 import { Link, useParams } from "react-router-dom";
-import image from "../ProductPage/images/spalding/96500475e5b6afc0ffb0628da646a820.jpg"
+import CartContext from "../ProductPage/CartLogic/cartContext";
 import "./styles.css"
 
 export default function Ball () {
   const qtyInput = useRef()
   const params = useParams()
   const [ball, setBall] = useState(null)
+  const cartContext = useContext(CartContext)
+  const image = useRef()
+  const ballPrice = useRef()
 
   useEffect(() => {
     const getAndSetBall = async () => {
@@ -24,7 +28,22 @@ export default function Ball () {
       }
     }
     getAndSetBall()
-  }, [])
+  }, [params.id, params.title])
+
+  const handleCartUpdate = (e) => {
+    e.preventDefault()
+    const action = {
+      type: "added",
+      title: params.title,
+      imageSrc: image.current.src,
+      price: ballPrice.current.innerText,
+      qty: qtyInput.current.value,
+      qtyInput: qtyInput.current,
+    }
+    if (action.qty === "") action.qty = 1
+    cartContext.cartDispatch(action)
+    qtyInput.current.value = '';
+  }
 
   const handleDecrementQty = () => {
     if (qtyInput.current.value <= 1) return
@@ -59,6 +78,7 @@ export default function Ball () {
           src={ball && ball.src}
           alt="ball"
           loading="lazy"
+          ref={image}
           />
         </section>
 
@@ -82,12 +102,14 @@ export default function Ball () {
             </p>
           </div>
           <div
-            className="price-container">
+            className="price-container"
+            ref={ballPrice}>
             ${ball && ball.price}
           </div>
           <div
             className="purchase-section">
             <form 
+              onSubmit={(e) => handleCartUpdate(e)}
               className="purchase-form">
               <div 
                 className="quantity-container">
@@ -121,7 +143,8 @@ export default function Ball () {
                 className="btn-container">
                 <button
                   id="ball-make-basket-btn"
-                  className="make-basket-btn">
+                  className="make-basket-btn"
+                  type="submit">
                   Make the basket
                 </button>
               </div>

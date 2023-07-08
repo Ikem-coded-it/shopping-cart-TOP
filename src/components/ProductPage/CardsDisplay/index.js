@@ -2,35 +2,31 @@ import BrandContainer from "../Brand"
 import { 
   useState, 
   useEffect, 
+  useContext,
 } from "react"
 import { 
   fetchAllSpaldingBalls,
   fetchAllWilsonBalls,
   fetchAllMoltenBalls,
-  getCart,
 } from "../../../firebase/controllers/dbController";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase/config";
 import Cart from "../Cart"
-import CartContext from "../Context/cartContext"
+import CartContext from "../CartLogic/cartContext"
 import "./styles.css"
 
 export default function CardsDisplay() {
   const [loggedInUser, setLoggedInUser] = useState(null)
-  const [cartItems, setCartItems] = useState([])
-  const [cartNumber, setCartNumber] = useState(0)
   const [spaldingBalls, setSpaldingBalls] = useState([])
   const [wilsonBalls, setWilsonBalls] = useState([])
   const [moltenBalls, setMoltenBalls] = useState([])
+  const cartContext = useContext(CartContext)
 
   useEffect(() => {
      onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("checked logged in user for cards")
-        setLoggedInUser(user)
-      } else  {
-        setLoggedInUser(null)
-      }
+      user ? 
+        setLoggedInUser(user) : 
+        setLoggedInUser(null);
     });
   })
 
@@ -46,32 +42,14 @@ export default function CardsDisplay() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser])
 
-  useEffect(() => {
-    const setCart = async() => {
-      if (loggedInUser !== null) {
-        const {uid} = loggedInUser;
-        const { cart } = await getCart(uid)
-        setCartItems([...cart])
-      }
-    }
-    setCart()
-  }, [loggedInUser])
-
-  const contextValues = {
-    cartNumber: cartNumber,
-    setCartNumber: setCartNumber,
-    cartItems: cartItems,
-    setCartItems: setCartItems,
-  }
-
   return (
     <div 
       data-testid="cards-display"
       className="card-display">
         {
           loggedInUser !== null ?
-          <CartContext.Provider value={contextValues}>
-            {cartItems && <Cart/>}
+          <>
+            {cartContext.cartItems && <Cart/>}
             {
               moltenBalls.length &&
               <>
@@ -89,7 +67,7 @@ export default function CardsDisplay() {
                 />
               </>
             }
-          </CartContext.Provider>
+          </>
            :
           <h1 style={{
             position: "absolute",
