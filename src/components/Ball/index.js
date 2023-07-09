@@ -4,9 +4,11 @@ import {
   useState,
   useContext,
 } from "react";
-import { fetchSingleBall } from "../../firebase/controllers/dbController";
+import { fetchSingleBall, updateCart } from "../../firebase/controllers/dbController";
 import { Link, useParams } from "react-router-dom";
 import CartContext from "../ProductPage/CartLogic/cartContext";
+import { AuthContext } from "../App";
+import Cart from "../ProductPage/Cart";
 import "./styles.css"
 
 export default function Ball () {
@@ -14,6 +16,7 @@ export default function Ball () {
   const params = useParams()
   const [ball, setBall] = useState(null)
   const cartContext = useContext(CartContext)
+  const authContext = useContext(AuthContext)
   const image = useRef()
   const ballPrice = useRef()
 
@@ -29,6 +32,11 @@ export default function Ball () {
     }
     getAndSetBall()
   }, [params.id, params.title])
+
+  useEffect(() => {
+    const { uid } = authContext.loggedInUser;
+    updateCart(cartContext.cartItems, uid);
+  }, [cartContext.cartItems, authContext.loggedInUser]);
 
   const handleCartUpdate = (e) => {
     e.preventDefault()
@@ -58,6 +66,7 @@ export default function Ball () {
   return (
     <div 
       className="ball">
+        <Cart />
 
         <section 
           className="ball-image-container">

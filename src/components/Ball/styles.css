@@ -1,3 +1,7 @@
+.cart {
+  top: 110px;
+}
+
 .ball {
   height: 80vh;
   display: flex;
@@ -137,6 +141,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .cart {
+    top: 50px;
+  }
+
   .ball {
       height: 140vh;
       flex-direction: column;

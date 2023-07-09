@@ -26,9 +26,9 @@
                 title: item.title,
                 imageSrc: item.imageSrc,
                 price: item.price,
-                qty: parseInt(item.qty) + parseInt(action.qtyInput.value === "" ?
+                qty: parseInt(item.qty) + parseInt(action.qty === "" ?
                                             1 :
-                                          action.qtyInput.value),
+                                          action.qty),
               }
               newCart = [...cartItems].with(index, newItem)
             }
@@ -37,6 +37,7 @@
           if (duplicate === false) {
             newCart = [...cartItems, cartItem]
           }
+          console.log(newCart)
           return newCart
         }
       }
