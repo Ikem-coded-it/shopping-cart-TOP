@@ -12,6 +12,11 @@ function NavBar({ user }) {
       <h1 className="logo">
         BallerStore
       </h1>
+      <input type="checkbox" id="check" />
+      <label htmlFor="check">
+        <i className="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-x"></i>
+      </label>
       <nav className="nav">
         <ul className="nav-list">
           {
