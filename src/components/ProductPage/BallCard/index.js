@@ -1,12 +1,13 @@
 import { 
   useContext, 
   useRef, 
-  useEffect 
+  useEffect,
 } from "react"
 import { Link } from "react-router-dom";
 import CartContext from "../CartLogic/cartContext"
 import { AuthContext } from "../../App";
 import { updateCart } from "../../../firebase/controllers/dbController";
+import LoadingSpinner from "../../Loader";
 import "./styles.css"
 
 export default function BallCard({ src, title, price, ballId }) {
@@ -37,45 +38,51 @@ export default function BallCard({ src, title, price, ballId }) {
   const ballPageLink = `/balls/${title}/${ballId}`;
 
   return (
-    <div 
-      data-testid="ball-card"
-      className="ball-card">
-      <img 
-        ref={image}
-        className="ball-image" 
-        src={src} 
-        alt="ball"
-        loading="lazy"
-      /> 
-      <Link 
-        id="ballcard-link"
-        to={ballPageLink}>
-        <span>
-          {title}
-        </span>
-      </Link>
-      <div 
-        className="input-price-container">
-        <span 
-          className="price"
-          ref={ballPrice}>
-          ${price}
-        </span>
-        <input 
-          data-testid="qty-input"
-          name="quantity"
-          ref={quantityInput} 
-          type="number" 
-          min={1}
-          max={10}
-          placeholder={1}
-        />
+    <>
+      {
+        !src ? 
+        <LoadingSpinner /> :
+        <div 
+        data-testid="ball-card"
+        className="ball-card">
+        <img 
+          ref={image}
+          className="ball-image" 
+          src={src} 
+          alt="ball"
+          loading="lazy"
+        /> 
+        <Link 
+          id="ballcard-link"
+          to={ballPageLink}>
+          <span>
+            {title}
+          </span>
+        </Link>
+        <div 
+          className="input-price-container">
+          <span 
+            className="price"
+            ref={ballPrice}>
+            ${price}
+          </span>
+          <input 
+            data-testid="qty-input"
+            name="quantity"
+            ref={quantityInput} 
+            type="number" 
+            min={1}
+            max={10}
+            placeholder={1}
+          />
+        </div>
+        <button
+          className="make-basket-btn"
+          onClick={() => handleCartUpdate()}>
+          Make the basket
+        </button>
       </div>
-      <button
-        className="make-basket-btn"
-        onClick={() => handleCartUpdate()}>
-        Make the basket
-      </button>
-    </div>
+      }
+    </>
   )
 }

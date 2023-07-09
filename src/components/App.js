@@ -31,26 +31,17 @@ export default function App() {
   const [cartNumber, setCartNumber] = useState(0)
 
   useEffect(() => {
-     onAuthStateChanged(auth, (user) => {
+     onAuthStateChanged(auth, async(user) => {
       if (user) {
-        console.log("checked logged in user")
         setLoggedInUser(user)
+        const { cart } = await getCart(user.uid)
+        dispatch({type: "added", cart})
       } else  {
         setLoggedInUser(null)
       }
     });
-  }, [loggedInUser])
+  }, [])
 
-  useEffect(() => {
-    const setCart = async() => {
-      if (loggedInUser !== null) {
-        const {uid} = loggedInUser;
-        const { cart } = await getCart(uid)
-        dispatch({type: "added", cart})
-      }
-    }
-    setCart()
-  }, [loggedInUser])
 
   const logOutUser = async () => {
     await firebaseSignOut()

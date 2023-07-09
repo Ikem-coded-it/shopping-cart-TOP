@@ -13,6 +13,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase/config";
 import Cart from "../Cart"
 import CartContext from "../CartLogic/cartContext"
+import LoadingSpinner from "../../Loader";
 import "./styles.css"
 
 export default function CardsDisplay() {
@@ -51,7 +52,7 @@ export default function CardsDisplay() {
           <>
             {cartContext.cartItems && <Cart/>}
             {
-              moltenBalls.length &&
+              moltenBalls.length ?
               <>
                 <BrandContainer 
                   cards={spaldingBalls} 
@@ -66,6 +67,8 @@ export default function CardsDisplay() {
                   brand="Molten" 
                 />
               </>
+              :
+              <LoadingSpinner />
             }
           </>
            :

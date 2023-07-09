@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import CartContext from "../ProductPage/CartLogic/cartContext";
 import { AuthContext } from "../App";
 import Cart from "../ProductPage/Cart";
+import LoadingSpinner from "../Loader";
 import "./styles.css"
 
 export default function Ball () {
@@ -64,104 +65,111 @@ export default function Ball () {
   }
 
   return (
-    <div 
-      className="ball">
-        <Cart />
+    <>
+      {
+        !ball ?
+        <LoadingSpinner/>
+        :
+        <div 
+        className="ball">
+          <Cart />
 
-        <section 
-          className="ball-image-container">
-          <div 
-            className="ball-side-nav">
-              <Link 
-                className="ball-back-link"
-                to="/balls">
-               <div 
-                  className="left-arrow-container" 
-                  id="ball-back-btn">
-                  <i className="fa-solid fa-arrow-left"></i>
-                </div>
-              </Link>
-          </div>
-          <img
-          className="ball-ball-image"
-          src={ball && ball.src}
-          alt="ball"
-          loading="lazy"
-          ref={image}
-          />
-        </section>
-
-        <section
-          className="info-container">
-          <div 
-            className="ball-title-container">
-            <h1 className="ball-title">{ball && ball.title}</h1>
-            <div className="rating-container">
-              <i className="fa-regular fa-heart"></i>
-              <i className="fa-regular fa-heart"></i>
-              <i className="fa-regular fa-heart"></i>
-              <i className="fa-regular fa-heart"></i>
-              <i className="fa-regular fa-heart"></i>
-            </div>
-          </div>
-          <div 
-            className="description-container">
-            <p>
-              {ball && ball.description}
-            </p>
-          </div>
-          <div
-            className="price-container"
-            ref={ballPrice}>
-            ${ball && ball.price}
-          </div>
-          <div
-            className="purchase-section">
-            <form 
-              onSubmit={(e) => handleCartUpdate(e)}
-              className="purchase-form">
-              <div 
-                className="quantity-container">
-                <label 
-                  className="ball-qty-label"
-                  htmlFor="quantity">
-                  Quantity
-                </label>
-                <input 
-                  ref={qtyInput}
-                  className="ball-qty-input"
-                  type="number" 
-                  placeholder="1"
-                  name="quantity"
-                />
+          <section 
+            className="ball-image-container">
+            <div 
+              className="ball-side-nav">
+                <Link 
+                  className="ball-back-link"
+                  to="/balls">
                 <div 
-                  className="control">
-                  <div 
-                    onClick={() => handleDecrementQty()}
-                    className="left-arrow-container">
+                    className="left-arrow-container" 
+                    id="ball-back-btn">
                     <i className="fa-solid fa-arrow-left"></i>
                   </div>
+                </Link>
+            </div>
+            <img
+            className="ball-ball-image"
+            src={ball && ball.src}
+            alt="ball"
+            loading="lazy"
+            ref={image}
+            />
+          </section>
+
+          <section
+            className="info-container">
+            <div 
+              className="ball-title-container">
+              <h1 className="ball-title">{ball && ball.title}</h1>
+              <div className="rating-container">
+                <i className="fa-regular fa-heart"></i>
+                <i className="fa-regular fa-heart"></i>
+                <i className="fa-regular fa-heart"></i>
+                <i className="fa-regular fa-heart"></i>
+                <i className="fa-regular fa-heart"></i>
+              </div>
+            </div>
+            <div 
+              className="description-container">
+              <p>
+                {ball && ball.description}
+              </p>
+            </div>
+            <div
+              className="price-container"
+              ref={ballPrice}>
+              ${ball && ball.price}
+            </div>
+            <div
+              className="purchase-section">
+              <form 
+                onSubmit={(e) => handleCartUpdate(e)}
+                className="purchase-form">
+                <div 
+                  className="quantity-container">
+                  <label 
+                    className="ball-qty-label"
+                    htmlFor="quantity">
+                    Quantity
+                  </label>
+                  <input 
+                    ref={qtyInput}
+                    className="ball-qty-input"
+                    type="number" 
+                    placeholder="1"
+                    name="quantity"
+                  />
                   <div 
-                    onClick={() => handleIncrementQty()}
-                    className="right-arrow-container">
-                    <i className="fa-solid fa-arrow-right"></i>
+                    className="control">
+                    <div 
+                      onClick={() => handleDecrementQty()}
+                      className="left-arrow-container">
+                      <i className="fa-solid fa-arrow-left"></i>
+                    </div>
+                    <div 
+                      onClick={() => handleIncrementQty()}
+                      className="right-arrow-container">
+                      <i className="fa-solid fa-arrow-right"></i>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div 
-                className="btn-container">
-                <button
-                  id="ball-make-basket-btn"
-                  className="make-basket-btn"
-                  type="submit">
-                  Make the basket
-                </button>
-              </div>
-            </form>
-          </div>
-          <p className="promo">BallerStore members get 20% off</p>
-        </section>
+                <div 
+                  className="btn-container">
+                  <button
+                    id="ball-make-basket-btn"
+                    className="make-basket-btn"
+                    type="submit">
+                    Make the basket
+                  </button>
+                </div>
+              </form>
+            </div>
+            <p className="promo">BallerStore members get 20% off</p>
+          </section>
 
-    </div>
+      </div>
+      }
+    </>
   )
 }
