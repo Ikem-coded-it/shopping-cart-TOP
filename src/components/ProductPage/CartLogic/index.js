@@ -37,7 +37,6 @@
           if (duplicate === false) {
             newCart = [...cartItems, cartItem]
           }
-          console.log(newCart)
           return newCart
         }
       }

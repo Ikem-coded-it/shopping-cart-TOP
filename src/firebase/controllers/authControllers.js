@@ -1,11 +1,15 @@
 import { 
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import { doc, setDoc, collection } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore"; 
+import { getCart } from "./dbController";
 import { db } from "../config";
 
 import { auth } from "../config";
+const provider = new GoogleAuthProvider();
 
 const validateSignUpForm = (form) => {
   const firstName = form.firstname.value;
@@ -70,18 +74,33 @@ const firebaseSignIn = (form) => {
   .catch((error) => {
     if (error.code === "auth/wrong-password")
       alert('Wrong email or password')
-    console.log(error.message)
+      console.log(error.message)
   });
 }
 
 const firebaseSignOut = () => {
   auth.signOut().then(() => {
-    console.log("User signed out")
+    return
   })
+}
+
+const googleSignin = async() => {
+  try {
+    const result = await signInWithPopup(auth, provider)
+    const user = result.user;
+
+    // check if cart and create cart
+    await getCart(user.uid)
+
+    return user 
+  } catch (error) {
+    alert(error.message)
+  }
 }
 
 export {
   firebaseSignUp,
   firebaseSignIn,
   firebaseSignOut,
+  googleSignin,
 }

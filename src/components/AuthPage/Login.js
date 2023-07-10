@@ -1,6 +1,6 @@
 import dunkSVG from "./assets/Basketball-pana.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { firebaseSignIn } from "../../firebase/controllers/authControllers";
+import { firebaseSignIn, googleSignin } from "../../firebase/controllers/authControllers";
 import { AuthContext } from "../App";
 import { useContext } from "react";
 import "./login.css";
@@ -13,6 +13,12 @@ export default function Login () {
     e.preventDefault()
     const user = firebaseSignIn(e.target)
     authContext.setLoggedInUser(user);
+    navigate("/balls")
+  }
+
+  async function handleGoogleSignIn () {
+    const user = await googleSignin()
+    authContext.setLoggedInUser(user)
     navigate("/balls")
   }
 
@@ -73,12 +79,19 @@ export default function Login () {
               type="submit">
               Login
             </button>
-            <p className="ask-signup">
-              Don't have an account? <Link className="signup-link" to="/auth/signup">Sign up</Link>
-            </p>
           </div>
-
         </form>
+        <div
+          className="google-auth-container">
+          <button
+            onClick={handleGoogleSignIn}
+            className="google-login-btn">
+            <i className="fa-brands fa-google"></i>
+          </button>
+          <p className="ask-signup">
+              Don't have an account? <Link className="signup-link" to="/auth/signup">Sign up</Link>
+          </p>
+        </div>
       </div>
 
     </div>

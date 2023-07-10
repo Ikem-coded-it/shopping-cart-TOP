@@ -14,37 +14,59 @@
 
 .firstname-container,
 .lastname-container,
-.confirm-password-container {
-  /* border: 1px solid green; */
+.confirm-password-container,
+.signup-email-container,
+.signup-password-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
   height: 15%;
   align-items: center;
+  transition: all .5s ease;
 }
 
-.email-container,
-.password-container {
-  gap: 2px;
+.firstname-container:hover,
+.lastname-container:hover,
+.confirm-password-container:hover,
+.signup-email-container:hover,
+.signup-password-container:hover {
+  transform: scale(1.1)
 }
 
 .firstname-label,
 .lastname-label,
-.confirm-password-label {
+.confirm-password-label,
+.signup-email-label,
+.signup-password-label {
   font-size: 20px;
   font-weight: 600;
 }
 
 .firstname-input,
 .lastname-input,
-.confirm-password-input {
-  border: 1px solid var(--border-color-orange);
+.confirm-password-input,
+.signup-email-input,
+.signup-password-input {
+  border-bottom: 3px solid var(--border-color-orange);
   border-radius: 5px;
   padding: 5px;
   font-weight: 300;
   font-size: 17px;
-  width: 60%;
+  width: 80%;
+  height: 60%;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  box-shadow: 3px 3px 10px rgb(90, 89, 89);
+}
+
+.register-btn {
+  height: 70px;
+  width: 250px;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 500;
 }
 
 @media only screen and (max-width: 600px) {
@@ -64,7 +86,9 @@
   
     .firstname-label,
     .lastname-label,
-    .confirm-password-label {
+    .confirm-password-label,
+    .signup-email-label,
+    .signup-password-label {
       font-size: 20px;
       font-weight: 700;
       color: var(--font-light-light);
@@ -74,19 +98,25 @@
     .lastname-input,
     .confirm-password-input {
       padding: 5px;
-      font-weight: 300;
+      font-weight: 600;
       font-size: 17px;
       width: 80%;
     }
 
-    .email-input,
-    .password-input {
+    .signup-email-input,
+    .signup-password-input {
       width: 70%;
+      font-size: 17px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .register-btn {
+      margin-top: 20px;
     }
 
     .ask-signup,
     .signup-link {
       color: var(--font-light-light);
-      font-size: 13px;
+      font-size: 14px;
     }
 }

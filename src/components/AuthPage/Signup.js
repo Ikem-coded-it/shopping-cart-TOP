@@ -26,6 +26,7 @@ export default function Signup() {
             className="firstname-input"
             type="text" 
             name="firstname"  
+            placeholder="first name"
             required
           />
         </div>
@@ -41,37 +42,40 @@ export default function Signup() {
             className="lastname-input"
             type="text" 
             name="lastname"  
+            placeholder="last name"
             required
           />
         </div>
 
         <div 
-          className="email-container">
+          className="signup-email-container">
           <label 
-            className="email-label"
+            className="signup-email-label"
             htmlFor="email">
             Email
           </label>
           <input 
-            className="email-input"
+            className="signup-email-input"
             type="email" 
             name="email"  
+            placeholder="email"
             required
           />
         </div>
 
         <div 
-          className="password-container">
+          className="signup-password-container">
           <label 
-            className="password-label"
+            className="signup-password-label"
             htmlFor="password">
             Password
           </label>
           <input 
-            className="password-input"
+            className="signup-password-input"
             type="password" 
             name="password" 
             minLength={8} 
+            placeholder="password"
             required
           />
         </div>
@@ -87,6 +91,7 @@ export default function Signup() {
             className="confirm-password-input"
             type="password" 
             name="confirmpassword" 
+            placeholder="confirm password"
             minLength={8} 
             required
           />
@@ -95,7 +100,7 @@ export default function Signup() {
         <div 
           className="login-btn-container">
           <button 
-            className="login-btn"
+            className="register-btn"
             type="submit">
             Sign up
           </button>

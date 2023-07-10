@@ -126,11 +126,13 @@ const getCart = async (id) => {
     const docRef = doc(db, `carts`, id);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
+    if (docSnap.exists()) { // if old user then he has a cart
       const data = docSnap.data();
       return data;
     } else {
-      alert("Cart does not exist");
+      // for google auth signin, if new user, he has no cart so create cart
+      await setDoc(doc(db, "carts", id), {cart: []});
+      return "new_cart_created"
     }
   } catch (error) {
     alert(error.message)

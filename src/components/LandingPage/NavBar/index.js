@@ -29,8 +29,8 @@ function NavBar({ user }) {
             authContext.loggedInUser === null ?
             <Link 
               className="nav-list-items" 
-              to="/auth/login">
-              onClick={handleCloseSidebar}
+              to="/auth/login"
+              onClick={handleCloseSidebar}>
               Login
             </Link>
             :

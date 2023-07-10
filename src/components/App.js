@@ -10,37 +10,21 @@ import BallPage from "../Pages/BallPage";
 import AdminPage from "../Pages/AdminPage";
 import { 
   createContext, 
-  useState, 
-  useEffect, 
+  useState,
   useReducer 
 } from "react"
 import { firebaseSignOut } from "../firebase/controllers/authControllers";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/config";
 import cartReducer from "./ProductPage/CartLogic";
-import { getCart } from "../firebase/controllers/dbController";
 import CartContext from "./ProductPage/CartLogic/cartContext";
 import './App.css';
 
 const AuthContext = createContext(0)
-const initialState = null
+const initialState = []
 
 export default function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [cartItems, dispatch] = useReducer(cartReducer, initialState)
   const [cartNumber, setCartNumber] = useState(0)
-
-  useEffect(() => {
-     onAuthStateChanged(auth, async(user) => {
-      if (user) {
-        setLoggedInUser(user)
-        const { cart } = await getCart(user.uid)
-        dispatch({type: "added", cart})
-      } else  {
-        setLoggedInUser(null)
-      }
-    });
-  }, [])
 
 
   const logOutUser = async () => {
@@ -70,7 +54,7 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/admin" element={<AdminPage />} />
           {
-            cartItems &&
+            // cartItems &&
             <>
               <Route path="/balls">
                 <Route index element={<BallsPage />} />
