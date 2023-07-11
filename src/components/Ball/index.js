@@ -4,7 +4,11 @@ import {
   useState,
   useContext,
 } from "react";
-import { fetchSingleBall, updateCart } from "../../firebase/controllers/dbController";
+import { 
+  fetchSingleBall, 
+  updateCart,
+  updateBall,
+} from "../../firebase/controllers/dbController";
 import { Link, useParams } from "react-router-dom";
 import CartContext from "../ProductPage/CartLogic/cartContext";
 import { AuthContext } from "../App";
@@ -64,6 +68,59 @@ export default function Ball () {
     qtyInput.current.value++
   }
 
+  const handleRating = async(e) => {
+    const ratingNumber = e.target.getAttribute("data-rating");
+    const userId = authContext.loggedInUser.uid
+    const newBall = {
+      title: ball.title,
+      src: ball.src,
+      price: ball.price,
+      description: ball.description,
+      rating: ball.rating
+    }
+
+    const newRating = {
+      userId: userId,
+      number: ratingNumber
+    }
+
+    // check if current user has rated ball before
+    const oldUserRating = newBall.rating.find((rating) => {
+      if (rating.userId === userId) return rating;
+    })
+
+    if (oldUserRating === undefined) {
+      // add new rating to ratings array
+      newBall.rating.push(newRating)
+      await updateDatabase(newBall)
+      setBall(newBall)
+    } else {
+      // change rating number
+      newBall.rating.forEach(rating => {
+        if (rating.userId === newRating.userId) {
+          rating.number = newRating.number
+        }
+      })
+      await updateDatabase(newBall)
+      setBall(newBall)
+    }
+  }
+
+  // update ball in db with ball with new rating
+  const updateDatabase = async(newBall) => {
+    const ballName = newBall.title.split("0")[0]
+      switch(ballName) {
+        case "Spalding":
+          await updateBall(newBall, "spalding", params.id);
+          break;
+        case "Wilson":
+          await updateBall(newBall, "wilson", params.id);
+          break;
+        default:
+          await updateBall(newBall, "molten", params.id);
+      }
+  }
+
   return (
     <>
       {
@@ -103,11 +160,21 @@ export default function Ball () {
               className="ball-title-container">
               <h1 className="ball-title">{ball && ball.title}</h1>
               <div className="rating-container">
-                <i className="fa-regular fa-heart"></i>
-                <i className="fa-regular fa-heart"></i>
-                <i className="fa-regular fa-heart"></i>
-                <i className="fa-regular fa-heart"></i>
-                <i className="fa-regular fa-heart"></i>
+                <i data-rating={1} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
+                <i data-rating={2} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
+                <i data-rating={3} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
+                <i data-rating={4} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
+                <i data-rating={5} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
+                <div>
+                  {// get average rating for ball
+                    ball &&
+                    Math.round(
+                      ((ball.rating.reduce((prev, curr) => {
+                        return parseInt(prev) + parseInt(curr.number)
+                      }, 0) / ball.rating.length) * 10)
+                    ) / 10
+                  }
+                </div>
               </div>
             </div>
             <div 

@@ -111,6 +111,20 @@ const fetchSingleBall = async (collection, ballId) => {
   }
 }
 
+const updateBall = async (newBall, collection, ballId) => {
+  try {
+    await setDoc(doc(db, `products/balls/${collection}`, ballId), {
+      title: newBall.title,
+      description: newBall.description,
+      src: newBall.src,
+      rating: newBall.rating,
+      price: newBall.price
+    });
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 const updateCart = async (newCart, id) => {
   try {
     await setDoc(doc(db, "carts", id), {
@@ -147,6 +161,7 @@ export {
   fetchAllWilsonBalls,
   fetchAllMoltenBalls,
   fetchSingleBall,
+  updateBall,
   updateCart,
   getCart,
 }
