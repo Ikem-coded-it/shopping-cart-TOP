@@ -39,9 +39,40 @@ export default function Ball () {
   }, [params.id, params.title])
 
   useEffect(() => {
-    const { uid } = authContext.loggedInUser;
-    updateCart(cartContext.cartItems, uid);
+    if (authContext.loggedInUser !== null) {
+      const { uid } = authContext.loggedInUser;
+      updateCart(cartContext.cartItems, uid);
+    }
   }, [cartContext.cartItems, authContext.loggedInUser]);
+
+  useEffect(() => {
+    if (authContext.loggedInUser !== null) {
+      const userId = authContext.loggedInUser.uid
+      if (ball !== null) {
+        // get all stars
+        const stars = document.querySelectorAll('[data-rating]');
+        console.log(stars)
+        // get user rating number
+        const rating = ball.rating.find((rating) => {
+          return rating.userId === userId;
+        })
+
+        if (rating !== undefined) {
+          // iterate stars and color rating number of stars
+          stars.forEach((star, index) => {
+            if (index < parseInt(rating.number)) {
+              star.style.color = 'red';
+            } else {
+              star.style.color = 'var(--font-dark-light)';
+            }
+          })
+        } else {
+          return
+        }
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ball])
 
   const handleCartUpdate = (e) => {
     e.preventDefault()
@@ -85,6 +116,7 @@ export default function Ball () {
     }
 
     // check if current user has rated ball before
+    // eslint-disable-next-line array-callback-return
     const oldUserRating = newBall.rating.find((rating) => {
       if (rating.userId === userId) return rating;
     })
@@ -160,12 +192,12 @@ export default function Ball () {
               className="ball-title-container">
               <h1 className="ball-title">{ball && ball.title}</h1>
               <div className="rating-container">
-                <i data-rating={1} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
-                <i data-rating={2} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
-                <i data-rating={3} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
-                <i data-rating={4} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
-                <i data-rating={5} onClick={(e) => handleRating(e)} className="fa-regular fa-star"></i>
-                <div>
+                <i data-rating={1} onClick={(e) => handleRating(e)} className="fa-solid fa-star"></i>
+                <i data-rating={2} onClick={(e) => handleRating(e)} className="fa-solid fa-star"></i>
+                <i data-rating={3} onClick={(e) => handleRating(e)} className="fa-solid fa-star"></i>
+                <i data-rating={4} onClick={(e) => handleRating(e)} className="fa-solid fa-star"></i>
+                <i data-rating={5} onClick={(e) => handleRating(e)} className="fa-solid fa-star"></i>
+                <div id="rating-number">
                   {// get average rating for ball
                     ball &&
                     Math.round(

@@ -69,8 +69,22 @@
 .rating-container {
   display: flex;
   gap: 7px;
-  color: var(--border-color-orange);
+  color: var(--font-dark-light);
   font-size: 20px;
+}
+
+.fa-star {
+  transition: all .5s ease;
+}
+
+.fa-star:hover {
+  cursor: pointer;
+  transform: scale(1.4);
+}
+
+#rating-number {
+  font-weight: bold;
+  margin-left: 30px;
 }
 
 .description-container {
