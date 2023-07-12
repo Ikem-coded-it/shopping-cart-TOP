@@ -1,6 +1,12 @@
-import { useRef, useContext } from "react";
+import { 
+  useRef, 
+  useContext, 
+  useEffect,
+  useState
+} from "react";
 import CartContext from "../CartLogic/cartContext";
 import {v4 as uuidv4} from "uuid";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import "./styles.css";
 
 export default function Cart () {
@@ -8,7 +14,21 @@ export default function Cart () {
   const cartModalOpen = useRef()
   const cartModalClose = useRef()
   const cartContext = useContext(CartContext)
+  const [total, setTotal] = useState(0)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const cartItemsDuplicate = [...cartContext.cartItems]
+
+  useEffect(() => {
+    function calculateTotal() {
+      setTotal(cartItemsDuplicate.reduce(
+        (prev, curr) => {
+        const priceNumber = curr.price.split("$")[1]
+        return prev + (priceNumber * curr.qty)
+      }, 0))
+    }
+    calculateTotal()
+  }, [cartItemsDuplicate])
+  console.log(total)
 
   const handleCartOpen = () => {
     cartModal.current.showModal()
@@ -16,6 +36,30 @@ export default function Cart () {
 
   const handleCartClose = () => {
     cartModal.current.close()
+  }
+
+  const initialOptions = {
+    clientId: process.env.REACT_APP_PAYPAL_CLIENTID,
+    currency: "USD",
+    intent: "capture",
+  };
+
+  const handlePaypalCreateOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: `${total}`
+          }
+        }
+      ]
+    })
+  }
+
+  const handlePaypalOnApprove = (data, actions) => {
+    return actions.order.capture().then(function (details) {
+      alert("Transaction completed by " + details.payer.name.given_name)
+    })
   }
 
   return (
@@ -32,7 +76,7 @@ export default function Cart () {
           className="count-display">
           {
             cartItemsDuplicate.length &&
-             cartItemsDuplicate.reduce(
+            cartItemsDuplicate.reduce(
               (prev, curr) => {
               return parseInt(curr.qty) + parseInt(prev)
             }, 0)
@@ -71,24 +115,27 @@ export default function Cart () {
             className="checkout-btn-container">
             <div 
               className="total-price-display">
-              Total: ${
-                cartItemsDuplicate.length &&
-                 cartItemsDuplicate.reduce(
-                  (prev, curr) => {
-                  const priceNumber = curr.price.split("$")[1]
-                  return prev + (priceNumber * curr.qty)
-                }, 0)
-              }
+              Total: {"$"+total}
             </div>
-            <button 
+            {/* <button 
               className="checkout-btn">
               Checkout
-            </button>
+            </button> */}
+            <PayPalScriptProvider options={initialOptions}>
+              {
+                total !== 0 &&
+                <PayPalButtons
+                style={{ layout: "horizontal" }}
+                createOrder={handlePaypalCreateOrder}
+                onApprove={handlePaypalOnApprove}
+              />
+              }
+            </PayPalScriptProvider>
           </div>
         </div>
       </dialog>
-
     </div>
+
   )
 }
 

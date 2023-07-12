@@ -20,7 +20,7 @@ const validateSignUpForm = (form) => {
 
   if (!firstName || firstName === '')
     return new Error("First name is required")
-    
+
   if (!lastName || lastName === '')
     return new Error("Last name is required")
 
@@ -44,6 +44,7 @@ const validateSignInForm = (form) => {
 
   if (!email || email === '')
     return new Error("Please provide an email address")
+    
   if (!password || password === '') 
     return new Error("Please provide a password")
 }
