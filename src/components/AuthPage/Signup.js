@@ -1,13 +1,42 @@
 import { Link, useNavigate } from "react-router-dom"
 import { firebaseSignUp } from "../../firebase/controllers/authControllers"
-import "./signup.css" // email password and button container use styles from login.css
+import { AuthContext } from "../App"
+import { useState, useContext } from "react"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "../../firebase/config"
+import LoadingSpinner from "../Loader"
+import "./signup.css"
 
 export default function Signup() {
   const navigate = useNavigate()
-  function handleSubmit (e) {
+  const authContext = useContext(AuthContext)
+  const [isRegistering, setIsRegistering] = useState(false)
+
+  async function handleSubmit (e) {
     e.preventDefault()
-    firebaseSignUp(e.target)
-    navigate("/auth/login")
+    setIsRegistering(true)
+    const user = await firebaseSignUp(e.target)
+
+     // check if error and show error
+    const errorDisplay = document.querySelector('#signup-error-display')
+    if (user instanceof Error) {
+      errorDisplay.textContent = user.message;
+      errorDisplay.style.opacity = 1;
+      setIsRegistering(false)
+      return
+    } else {
+      errorDisplay.style.opacity = 0;
+    }
+
+    authContext.setLoggedInUser(user);
+
+    // check if logged in then go to product page
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsRegistering(false)
+        navigate("/balls")
+      } 
+    })
   }
 
   return (
@@ -27,6 +56,8 @@ export default function Signup() {
             type="text" 
             name="firstname"  
             placeholder="first name"
+            minLength={2}
+            maxLength={20}
             required
           />
         </div>
@@ -43,6 +74,8 @@ export default function Signup() {
             type="text" 
             name="lastname"  
             placeholder="last name"
+            minLength={2}
+            maxLength={20}
             required
           />
         </div>
@@ -98,11 +131,16 @@ export default function Signup() {
         </div>
 
         <div 
-          className="login-btn-container">
+          className="signup-btn-container">
+          <div id="signup-error-display"></div>
           <button 
             className="register-btn"
             type="submit">
             Sign up
+            {
+              isRegistering === true &&
+              <LoadingSpinner />
+            }
           </button>
           <p className="ask-signup">
             Already have an account? <Link className="signup-link" to="/auth/login">Sign in</Link>

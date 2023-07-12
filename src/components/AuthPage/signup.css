@@ -31,7 +31,7 @@
 .confirm-password-container:hover,
 .signup-email-container:hover,
 .signup-password-container:hover {
-  transform: scale(1.1)
+  transform: scale(1.05)
 }
 
 .firstname-label,
@@ -59,6 +59,20 @@
   font-family: 'Courier New', Courier, monospace;
   font-weight: 600;
   box-shadow: 3px 3px 10px rgb(90, 89, 89);
+}
+
+.signup-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#signup-error-display {
+  height: 30%;
+  width: 100%;
+  color: red;
+  text-align: center;
+  opacity: 0;
 }
 
 .register-btn {
@@ -110,6 +124,11 @@
       font-family: 'Courier New', Courier, monospace;
     }
 
+    #signup-error-display {
+      height: 3%;
+      margin-top: 10px;
+    }
+
     .register-btn {
       margin-top: 20px;
     }
@@ -117,6 +136,7 @@
     .ask-signup,
     .signup-link {
       color: var(--font-light-light);
-      font-size: 14px;
+      font-size: 15px;
+      margin-bottom: 10px;
     }
 }

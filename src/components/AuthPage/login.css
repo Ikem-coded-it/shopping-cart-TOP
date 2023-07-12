@@ -60,16 +60,25 @@
 }
 
 .login-btn-container {
-  height: 20%;
+  height: 25%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  gap: 15px;
+  gap: 0;
+}
+
+#error-display {
+  height: 30%;
+  width: 100%;
+  color: red;
+  text-align: center;
+  opacity: 0;
 }
 
 .login-btn {
   width: 250px;
-  height: 100%;
+  height: 60%;
 }
 
 .google-auth-container {
@@ -142,7 +151,7 @@
     }
   
     .login-btn-container {
-      height: 15%;
+      height: 20%;
       display: flex;
       flex-direction: column;
       justify-content: center;

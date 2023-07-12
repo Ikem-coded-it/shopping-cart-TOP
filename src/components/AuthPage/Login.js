@@ -2,24 +2,52 @@ import dunkSVG from "./assets/Basketball-pana.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { firebaseSignIn, googleSignin } from "../../firebase/controllers/authControllers";
 import { AuthContext } from "../App";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import LoadingSpinner from "../Loader";
 import "./login.css";
 
 export default function Login () {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const user = firebaseSignIn(e.target)
+    setIsLoggingIn(true)
+    const user = await firebaseSignIn(e.target)
+
+    // check if error and show error
+    const errorDisplay = document.querySelector('#error-display')
+    if (user instanceof Error) {
+      errorDisplay.textContent = user.message;
+      errorDisplay.style.opacity = 1;
+      setIsLoggingIn(false)
+      return
+    } else {
+      errorDisplay.style.opacity = 0;
+    }
+
     authContext.setLoggedInUser(user);
-    navigate("/balls")
+
+    // check if logged in then go to product page
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggingIn(false)
+        navigate("/balls")
+      } 
+    })
   }
 
   async function handleGoogleSignIn () {
     const user = await googleSignin()
     authContext.setLoggedInUser(user)
-    navigate("/balls")
+
+    // check if logged in then go to product page
+    onAuthStateChanged(auth, (user) => {
+      user && navigate("/balls") 
+    })
   }
 
   return (
@@ -74,10 +102,15 @@ export default function Login () {
 
           <div 
             className="login-btn-container">
+            <div id="error-display"></div>
             <button 
               className="login-btn"
               type="submit">
               Login
+              {
+                isLoggingIn === true &&
+                <LoadingSpinner />
+              }
             </button>
           </div>
         </form>

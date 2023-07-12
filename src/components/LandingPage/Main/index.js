@@ -1,7 +1,6 @@
  import { Link } from "react-router-dom";
  import { useContext } from "react";
  import { AuthContext } from "../../App";
- import ReactLoading from "react-loading";
 import "./styles.css"
 
 export default function Main() {

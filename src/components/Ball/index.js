@@ -51,7 +51,6 @@ export default function Ball () {
       if (ball !== null) {
         // get all stars
         const stars = document.querySelectorAll('[data-rating]');
-        console.log(stars)
         // get user rating number
         const rating = ball.rating.find((rating) => {
           return rating.userId === userId;
