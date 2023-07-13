@@ -1,5 +1,12 @@
-.main-background {
-  height: 90vh;
+.main {
+  height: 230vh;
+  background-color: var(--ball-card-background);
+}
+
+/* FIRST SECTION */
+
+.top-section {
+  height: 35%;
   display: flex;
   justify-content: flex-end;
   background-image: url("../images/gettyimages-159373860-612x612.jpg");
@@ -62,9 +69,139 @@ button {
   font-family: Geneva, Verdana, sans-serif;
 }
 
+
+/* SECOND SECTION */
+
+
+
+
+/* THIRD SECTION */
+
+.write-up-container-2 {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  color: var(--font-light-light);
+  /* border: 1px solid red; */
+  gap: 30px;
+}
+
+.write-up-container-2 h1 {
+  font-size: 60px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: var(--border-color-orange);
+}
+
+.brand-story-container {
+  height: 40%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 40px 0 40px;
+  background-color: black;
+}
+
+.brand-story-1 {
+  width: 100%;
+  height: fit-content;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.brand-story-2 {
+  width: 90%;
+  height: fit-content;
+  font-size: 20px;
+  text-align: left;
+  font-family: cursive;
+}
+
+.random-basketball-icons {
+  width: 90%;
+  height: fit-content;
+  font-size: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+#ball-1 {
+  color: red;
+}
+
+#ball-2 {
+  color: green;
+}
+
+.dunking-guy-image {
+  height: 80%;
+  width: 55%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 900px) {
+  /* THIRD SECTION */
+  .write-up-container-2 {
+    height: 90%;
+    text-align: left;
+  }
+
+  .write-up-container-2 h1 {
+    font-size: 60px;
+  }
+
+  .brand-story-container {
+    height: 50%;
+    padding: 0 30px 0 30px;
+  }
+
+  .brand-story-1,
+  .brand-story-2 {
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+
+  .brand-story-1 {
+    font-size: 23px;
+    font-weight: bold;
+  }
+
+  .brand-story-2 {
+    font-size: 18px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 600px) {
-  .main-background {
+  .main {
+    height: 250vh;
+  }
+
+  /* FIRST SECTION */
+  .top-section {
     justify-content: center;
+    height: 30%;
     background-image: url("../images/images\ \(9\).jpeg"),
       linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
     background-blend-mode: darken;
@@ -102,5 +239,57 @@ button {
 
   button {
     font-size: 15px;
+  }
+
+  /* SECOND SECTION */
+
+
+
+  
+
+  /* THIRD SECTION */
+  .write-up-container-2 {
+    height: 70%;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .write-up-container-2 h1 {
+    color: var(--border-color-orange);
+    font-size: 55px;
+  }
+
+  .brand-story-container {
+    height: 65%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 0 30px 0;
+  }
+
+  .brand-story-1,
+  .brand-story-2 {
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 20px 0 20px;
+  }
+  
+
+  .brand-story-1 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .brand-story-2 {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .random-basketball-icons {
+    display: none;
+  }
+
+  .dunking-guy-image {
+    height: 50%;
+    width: 100%;
   }
 }
