@@ -1,4 +1,5 @@
 .contacts {
+  margin-top: 100px;
   height: 90vh;
   width: 100%;
   display: flex;
@@ -32,6 +33,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .contact {
+    margin-top: 0;
+  }
+  
   .socials {
     gap: 40px;
   }

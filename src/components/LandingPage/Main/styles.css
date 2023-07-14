@@ -97,8 +97,8 @@ button:hover {
 
 .featured-products-title-container h1 {
   font-size: 45px;
-  font-family: sans-serif;
-  color: var(--font-dark-dark);
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--font-dark-light);
 }
 
 .featured-products-slide-container {
@@ -110,6 +110,7 @@ button:hover {
   width: 100%;
   height: 100%;
   overflow-y: hidden;
+  position: relative;
 }
 
 .slider-wrapper::-webkit-scrollbar {
@@ -117,16 +118,29 @@ button:hover {
   height: 0;
 }
 
+@keyframes slide-animation {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-82%);
+  }
+}
+
 .slider {
   height: 90%;
-  width: 5520px;
+  width: 7000px;
   display: flex;
-  gap: 30px;
+  gap: 200px;
+  position: absolute;
+  left: 0;
+  animation: slide-animation 40s linear 0s infinite;
 }
 
 .slider-image-container {
   height: 100%;
-  width: 200px;
+  width: 300px;
   background-color: var(--product-page-background);
   display: flex;
   align-items: center;
@@ -136,7 +150,7 @@ button:hover {
 
 .slider-image {
   height: 70%;
-  width: 90%;
+  width: 70%;
 }
 
 
@@ -373,6 +387,12 @@ button:hover {
 
   .featured-products-title-container h1 {
     font-size: 30px;
+  }
+
+  @keyframes slide-animation {
+    to {
+      transform: translateX(-61%);
+    }
   }
 
   .slider {

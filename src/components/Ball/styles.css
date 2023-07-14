@@ -3,6 +3,7 @@
 }
 
 .ball {
+  margin-top: 100px;
   height: 80vh;
   display: flex;
 }
@@ -159,7 +160,8 @@
     top: 50px;
   }
 
-  .ball {
+    .ball {
+      margin-top: 0;
       height: 140vh;
       flex-direction: column;
     }
