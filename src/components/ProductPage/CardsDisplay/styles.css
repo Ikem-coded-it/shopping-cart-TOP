@@ -8,6 +8,75 @@
   align-items: center;
   background-color: var(--product-page-background);
   position: relative;
+  padding-top: 70px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  border-top: 1px solid var(--font-dark-light);
+  border-radius: 10px 10px 0 0;
+}
+
+.search-bar {
+  display: flex;
+  background-color: white;
+}
+
+.search-bar input {
+  width: 500px;
+  height: 40px;
+  padding-right: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.search-bar input::-webkit-search-cancel-button {
+  height: 40px;
+}
+
+.search-bar .search-icon-container {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: var(--font-dark-light);
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-results-container {
+  height: 200px;
+  width: fit-content;
+  display:flex;
+  flex-direction: column;
+  margin-top: 3px;
+  cursor: pointer;
+  overflow: auto;
+}
+
+.search-results-container::-webkit-scrollbar {
+  height: 3px;
+}
+
+.search-result {
+  width: 250px;
+  height: 30px;
+  background-color: white;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--font-dark-light);
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.search-result:hover {
+  color: red;
 }
 
 .loading-spinner {
@@ -20,6 +89,27 @@
   .card-display {
     margin-top: 0;
     height: 410vh;
+  }
+
+  .search-container {
+    left: 10px;
+    top: 10px;
+  }
+
+  .search-bar input {
+    width: 200px;
+    height: 30px;
+  }
+
+  .search-bar .search-icon-container {
+    height: 30px;
+  }
+
+  .search-result {
+    width: 200px;
+    height: 35px;
+    font-weight: normal;
+    font-size: 18px;
   }
 
   .loading-spinner {

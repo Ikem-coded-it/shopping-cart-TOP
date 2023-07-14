@@ -28,7 +28,6 @@ export default function Cart () {
     }
     calculateTotal()
   }, [cartItemsDuplicate])
-  console.log(total)
 
   const handleCartOpen = () => {
     cartModal.current.showModal()

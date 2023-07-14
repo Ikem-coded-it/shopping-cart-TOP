@@ -16,13 +16,15 @@
 }
 
 .ball-image {
-  height: 60%;
-  width: 60%;
+  height: 100%;
+  width: 100%;
 }
 
 #ballcard-link {
   text-decoration: none;
   color: var(--main-color);
+  height: 60%;
+  width: 60%;
 }
 
 .input-price-container {

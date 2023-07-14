@@ -30,7 +30,7 @@ export default function Main() {
   }, [])
 
   return(
-    <div className="main">
+    <main className="main">
       <section data-testid="landing" className="top-section">
         <div className="write-up-container">
           <div className="write-up">
@@ -110,6 +110,10 @@ export default function Main() {
           loading="lazy"
          />
       </section>
-    </div>
+
+      {/* <div className="goal-section">
+          <div></div>
+      </div> */}
+    </main>
   )
 }

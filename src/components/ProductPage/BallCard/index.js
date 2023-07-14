@@ -45,20 +45,20 @@ export default function BallCard({ src, title, price, ballId }) {
         <div 
         data-testid="ball-card"
         className="ball-card">
-        <img 
-          ref={image}
-          className="ball-image" 
-          src={src} 
-          alt="ball"
-          loading="lazy"
-        /> 
         <Link 
           id="ballcard-link"
           to={ballPageLink}>
-          <span>
-            {title}
-          </span>
+            <img 
+            ref={image}
+            className="ball-image" 
+            src={src} 
+            alt="ball"
+            loading="lazy"
+          /> 
         </Link>
+        <span>
+          {title}
+        </span>
         <div 
           className="input-price-container">
           <span 

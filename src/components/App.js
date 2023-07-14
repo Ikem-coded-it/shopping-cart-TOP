@@ -53,21 +53,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          {
-            // cartItems &&
-            <>
-              <Route path="/balls">
-                <Route index element={<BallsPage />} />
-                <Route path=":title/:id" element={<BallPage />} />
-              </Route>
-            </>
-          }  
-
+          <Route path="/balls">
+            <Route index element={<BallsPage />} />
+            <Route path=":title/:id" element={<BallPage />} />
+          </Route>
           <Route path="/auth">
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<SignupPage />} />
           </Route>
-
           <Route path="/contacts" element={<ContactsPage />} />
         </Routes>
         <Footer />

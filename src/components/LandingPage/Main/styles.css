@@ -217,6 +217,12 @@ button:hover {
 }
 
 
+/* FOURTH SECTION */
+
+/* .goal-section {
+  height: 25%;
+  border: 2px solid red;
+} */
 
 
 
@@ -247,14 +253,16 @@ button:hover {
 
 
 
-@media only screen and (max-width: 900px) {
+
+
+@media only screen and (max-width: 955px) {
   .main {
     height: 270vh;
   }
 
   /* FIRST SECTION */
   .top-section {
-    height: 25%;
+    height: 35%;
   }
 
 
