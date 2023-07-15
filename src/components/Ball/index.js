@@ -14,6 +14,7 @@ import CartContext from "../ProductPage/CartLogic/cartContext";
 import { AuthContext } from "../App";
 import Cart from "../ProductPage/Cart";
 import LoadingSpinner from "../Loader";
+import Reviews from "./review";
 import "./styles.css"
 
 export default function Ball () {
@@ -161,7 +162,7 @@ export default function Ball () {
         <div 
         className="ball">
           <Cart />
-
+          <Reviews />
           <section 
             className="ball-image-container">
             <div 

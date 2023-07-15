@@ -11,8 +11,6 @@ import "./styles.css";
 
 export default function Cart () {
   const cartModal = useRef()
-  const cartModalOpen = useRef()
-  const cartModalClose = useRef()
   const cartContext = useContext(CartContext)
   const [total, setTotal] = useState(0)
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,7 +65,6 @@ export default function Cart () {
 
       <div 
         data-testid="cart-modal"
-        ref={cartModalOpen} 
         className="shopping-cart-open"
         onClick={() => handleCartOpen()}>
         <div 
@@ -89,7 +86,6 @@ export default function Cart () {
         className="cart-modal">
         <div className="cart-modal-inner">
           <i 
-            ref={cartModalClose}
             className="fa-solid fa-x"
             onClick={() => handleCartClose()}
           ></i>

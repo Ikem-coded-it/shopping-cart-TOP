@@ -37,6 +37,12 @@
   width: 50px;
   border: 2px solid white;
   margin-top: 20px;
+  transition: transform .4s ease;
+}
+
+#ball-back-btn:hover {
+  cursor: pointer;
+  transform: scale(1.06)
 }
 
 #ball-back-btn > .fa-solid {

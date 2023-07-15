@@ -44,6 +44,7 @@
   border: none;
   outline: none;
   background-color: var(--product-page-background);
+  scrollbar-gutter: stable;
 }
 
 .cart-modal::backdrop {
