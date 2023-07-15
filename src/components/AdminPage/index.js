@@ -42,7 +42,7 @@ export default function Admin () {
       src: url,
     }
 
-    const ballName = ball.title.split("0")[0]
+    const ballName = ball.title.split(" ")[0]
     switch(ballName) {
       case "Spalding":
         await uploadToSpalding(ball)

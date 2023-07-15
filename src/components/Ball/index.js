@@ -139,7 +139,7 @@ export default function Ball () {
 
   // update ball in db with ball with new rating
   const updateDatabase = async(newBall) => {
-    const ballName = newBall.title.split("0")[0]
+    const ballName = newBall.title.split(" ")[0]
       switch(ballName) {
         case "Spalding":
           await updateBall(newBall, "spalding", params.id);

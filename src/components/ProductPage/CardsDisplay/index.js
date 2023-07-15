@@ -121,30 +121,29 @@ export default function CardsDisplay() {
         {
           authContext.loggedInUser !== null ?
           <>
+            <div className="search-container">
+              <div className="search-bar">
+                <div className="search-icon-container">
+                  <i className="fa-solid fa-search"></i>
+                </div>
+                <input
+                  onChange={e => handleSearch(e)}
+                  type="search"
+                  placeholder="search"
+                />
+              </div>
+              <div className="search-results-container">
+                {
+                  filteredResults.map(result => {
+                    return <Result title={result.title} id={result.id} />
+                  })
+                }
+              </div>
+            </div>
             {cartContext.cartItems && <Cart/>}
             {
               spaldingBalls.length ?
               <>
-                <div className="search-container">
-                  <div className="search-bar">
-                    <div className="search-icon-container">
-                      <i className="fa-solid fa-search"></i>
-                    </div>
-                    <input
-                      onChange={e => handleSearch(e)}
-                      type="search"
-                      placeholder="search"
-                    />
-                  </div>
-                  <div className="search-results-container">
-                    {
-                      filteredResults.map(result => {
-                        return <Result title={result.title} id={result.id} />
-                      })
-                    }
-                  </div>
-                </div>
-
                 <BrandContainer 
                   cards={spaldingBalls} 
                   brand="Spalding"
