@@ -4,6 +4,11 @@ import { Link } from "react-router-dom"
 export default function Contacts () {
   return (
     <div className="contacts">
+      <div className="words">
+        <h1>Feel free</h1>
+        <h1>To reach out</h1>
+        <h1>To us</h1>
+      </div>
       <div className="socials">
         <Link
           target="_blank" // open in new tab

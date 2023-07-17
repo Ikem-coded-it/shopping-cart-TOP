@@ -11,13 +11,17 @@
   bottom: 200px;
 }
 
-#reviews-container:hover {
+#reviews-container:hover .fa-comment{
+  color: black;
+}
+
+#reviews-container:hover  {
   background-color: var(--border-color-orange);
 }
 
 .fa-comment {
   font-size: 35px;
-  color: var(--font-dark-light);
+  color: var(--border-color-orange);
   transition: transform .4s ease;
 }
 
@@ -94,6 +98,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 #name-time {
@@ -105,7 +110,7 @@
 
 #name {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #time {
@@ -154,21 +159,27 @@
   width: 20%;
   height: 100%;
   background-color: white;
-  color: var(--font-dark-light);
+  color: var(--border-color-orange);
   cursor: pointer;
+}
+
+.fa-paper-plane {
+  transition: transform .4s ease;
+}
+
+.review-btn:hover .fa-paper-plane {
+  transform: translateX(50%) rotate(45deg);
 }
 
 @media only screen and (max-width: 600px) {
   #reviews-container {
     height: 40px;
     width: 40px;
-    right: 0;
-    bottom: 200px;
+    bottom: 130px;
   }
 
   .fa-comment {
     font-size: 25px;
-    color: var(--font-dark-light)
   }
 
   .reviews-modal[open] {

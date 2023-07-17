@@ -3,21 +3,43 @@
   height: 90vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--main-color);
+}
+
+.words {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  box-sizing: border-box;
+  padding-left: 150px;
+  font-size: 40px;
+}
+
+.words h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--border-color-orange);
 }
 
 .socials {
   height: 50%;
-  width: 100%;
+  width: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 100px;
+  align-items: center;
+  gap: 50px;
 }
 
 .contact-icon {
-  font-size: 200px;
+  font-size: 120px;
+  transition: transform .4s ease;
+}
+
+.contact-icon:hover {
+  transform: scale(1.05)
 }
 
 .socials.fa-github {
@@ -33,12 +55,21 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .contact {
+  .contacts {
     margin-top: 0;
+  }
+
+  .words {
+    gap: 40px;
+    padding-left: 20px;
+    font-size: 20px;
   }
   
   .socials {
     gap: 40px;
+    align-items: flex-end;
+    padding-right: 20px;
+    box-sizing: border-box;
   }
 
   .contact-icon {

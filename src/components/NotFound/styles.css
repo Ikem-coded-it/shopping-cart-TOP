@@ -1,0 +1,111 @@
+.error-page {
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  margin-top: 100px;
+  box-sizing: border-box;
+  padding: 30px;
+  background-color: var(--product-page-background);
+}
+
+.right-side,
+.left-side {
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.right-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+}
+
+.opss,
+.something,
+.gone-wrong {
+  font-size: 60px;
+  color: var(--border-color-orange);
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.cant-find {
+  font-size: 30px;
+  width: 40%;
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.back-btn-container {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.back-link {
+  width: 40%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.go-back-btn {
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.go-back-btn .fa-arrow-left {
+  transition: transform .4s ease-out;
+}
+
+.go-back-btn:hover .fa-arrow-left {
+  transform: translateX(-100%);
+}
+
+@media only screen and (max-width: 600px) {
+  .error-page {
+    height: 155vh;
+    flex-direction: column;
+    margin-top: 0;
+    padding: 10px;
+  }
+
+  .right-side,
+  .left-side {
+    height: 50%;
+    width: 100%;
+  }
+
+  .right-side {
+    height: 50%;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .opss,
+  .something,
+  .gone-wrong {
+    font-size: 50px;
+  }
+
+  .cant-find {
+    width: 60%;
+  }
+
+  .back-btn-container {
+    height: 60px;
+    margin-top: 20px;
+  }
+
+  .back-link {
+    width: 45%;
+  }
+
+  .go-back-btn {
+    font-weight: bold;
+  }
+}

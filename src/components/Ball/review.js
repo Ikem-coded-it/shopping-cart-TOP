@@ -49,9 +49,9 @@ export default function Reviews ({ ball, setBall, updateDatabase, user }) {
 
     // Add 0 infront if its a one digit time (eg; 1:3am == 01:03am)
     if (hours.toString().length < 2) hours = '0'+ hours.toString();
-    if (minutes.toString().length < 2) minutes = '0'+ hours.toString();
+    if (minutes.toString().length < 2) minutes = '0'+ minutes.toString();
 
-    const date = today.getFullYear()+':'+(today.getMonth()+1)+':'+today.getDate();
+    const date = today.getFullYear()+'.'+(today.getMonth()+1)+'.'+today.getDate();
 
     let time;
     switch(parseInt(today.getHours()) >= 12) {
@@ -80,7 +80,6 @@ export default function Reviews ({ ball, setBall, updateDatabase, user }) {
       rating: ball.rating,
       reviews: [...ball.reviews, newReview]
     }
-    console.log(newBall)
 
     await updateDatabase(newBall)
     setBall(newBall)

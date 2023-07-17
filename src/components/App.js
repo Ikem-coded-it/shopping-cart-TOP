@@ -8,6 +8,7 @@ import LoginPage from "../Pages/LoginPage";
 import SignupPage from "../Pages/SignupPage";
 import BallPage from "../Pages/BallPage";
 import AdminPage from "../Pages/AdminPage";
+import NotFoundPage from "../Pages/NotfoundPage";
 import { 
   createContext, 
   useState,
@@ -62,6 +63,7 @@ export default function App() {
             <Route path="signup" element={<SignupPage />} />
           </Route>
           <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
        </CartContext.Provider>

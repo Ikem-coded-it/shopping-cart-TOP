@@ -12,7 +12,7 @@ export default function BrandContainer({ brand, cards }) {
       <h1 className="brand-name">
         {brand}
       </h1>
-      <p className="brand-description">Check out our {brand} basketballs</p>
+      <p className="brand-description">Click our {brand} balls to view information</p>
       <div className="ball-cards-container">
         {
           authContext.loggedInUser !== null &&

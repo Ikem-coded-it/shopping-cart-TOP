@@ -88,7 +88,7 @@
 @media only screen and (max-width: 600px) {
   .card-display {
     margin-top: 0;
-    height: 410vh;
+    height: 430vh;
   }
 
   .search-container {
@@ -99,6 +99,7 @@
   .search-bar input {
     width: 200px;
     height: 30px;
+    font-weight: normal;
   }
 
   .search-bar .search-icon-container {

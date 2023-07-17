@@ -341,7 +341,7 @@ button:hover {
 
 @media only screen and (max-width: 600px) {
   .main {
-    height: 330vh;
+    height: 310vh;
   }
 
   /* FIRST SECTION */
@@ -384,7 +384,7 @@ button:hover {
   }
 
   button {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   /* SECOND SECTION */
@@ -434,7 +434,7 @@ button:hover {
 
   .write-up-container-2 h1 {
     color: var(--border-color-orange);
-    font-size: 55px;
+    font-size: 60px;
   }
 
   .brand-story-container {

@@ -15,7 +15,7 @@
 
 body {
   height: fit-content;
-  width: 98.9vw;
+  width: 98.7vw;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--font-dark-light);
 }
@@ -23,4 +23,11 @@ body {
 #root {
   height: fit-content;
   width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    height: fit-content;
+    width: 99.8vw;
+  }
 }

@@ -44,7 +44,8 @@ h1 {
   }
 
   .brand-description {
-    font-size: 14px;
+    font-size: 17px;
+    text-align: center;
     color: var(--font-dark-dark);
   }
 }

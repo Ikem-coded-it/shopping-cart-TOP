@@ -46,7 +46,13 @@
 
 #ball-back-btn > .fa-solid {
   font-size: 30px;
-  color: var(--font-dark-light);
+  color: var(--border-color-orange);
+  transition: all .4s ease;
+}
+
+#ball-back-btn:hover .fa-solid {
+  color: black;
+  transform: translateX(-100%);
 }
 
 .ball-ball-image {
@@ -97,6 +103,7 @@
   height: 40%;
   width: 80%;
   font-size: 30px;
+  font-weight: bold;
 }
 
 .price-container {
@@ -232,6 +239,7 @@
   
     #ball-make-basket-btn {
       width: 70%;
+      font-size: 20px;
     }
 
     .promo {

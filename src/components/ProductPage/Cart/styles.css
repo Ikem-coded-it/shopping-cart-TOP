@@ -4,11 +4,11 @@
   position: absolute;
   top: 50px;
   right: 50px;
-  transition: transform 200ms ease-out;
+  transition: transform 200ms ease;
 }
 
 .cart:hover {
-  transform: scale(1.1)
+  transform: translateY(20%);
 }
 
 .shopping-cart-open {
@@ -19,7 +19,7 @@
 
 .fa-cart-shopping {
   font-size: 60px;
-  color: burlywood;
+  color: var(--border-color-orange);
   cursor: pointer;
 }
 
@@ -67,6 +67,11 @@
   right: 10px;
   top: 10px;
   cursor: pointer;
+  transition: all .4s ease;
+}
+
+.fa-x:hover {
+  transform: scale(1.25);
 }
 
 .cart-items-display {
@@ -176,7 +181,6 @@
 
   .fa-cart-shopping {
     font-size: 40px;
-    color: burlywood;
   }
 
   .count-display {
