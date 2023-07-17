@@ -118,7 +118,8 @@ const updateBall = async (newBall, collection, ballId) => {
       description: newBall.description,
       src: newBall.src,
       rating: newBall.rating,
-      price: newBall.price
+      price: newBall.price,
+      reviews: newBall.reviews
     });
   } catch (error) {
     console.log(error.message)

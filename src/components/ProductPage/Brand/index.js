@@ -1,8 +1,11 @@
 import BallCard from "../BallCard"
 import {v4 as uuidv4} from "uuid";
+import { AuthContext } from "../../App";
+import { useContext } from "react";
 import "./styles.css"
 
 export default function BrandContainer({ brand, cards }) {
+  const authContext = useContext(AuthContext);
   return (
     <div 
       className="brand-container">
@@ -12,6 +15,7 @@ export default function BrandContainer({ brand, cards }) {
       <p className="brand-description">Check out our {brand} basketballs</p>
       <div className="ball-cards-container">
         {
+          authContext.loggedInUser !== null &&
           cards.map((card) => {
             return (
               <BallCard

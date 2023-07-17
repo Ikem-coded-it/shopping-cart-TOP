@@ -1,7 +1,7 @@
 #reviews-container {
   height: 70px;
   width: 70px;
-  border: 2px solid white;
+  border: 2px solid var(--border-color-orange);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -11,9 +11,13 @@
   bottom: 200px;
 }
 
+#reviews-container:hover {
+  background-color: var(--border-color-orange);
+}
+
 .fa-comment {
   font-size: 35px;
-  color: white;
+  color: var(--font-dark-light);
   transition: transform .4s ease;
 }
 
@@ -34,6 +38,8 @@
   padding: 40px 10px 10px 10px;
   display: flex;
   flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 3px 3px 10px var(--font-dark-light);
 }
 
 .reviews-title {
@@ -57,44 +63,66 @@
   height: 100px;
   display: flex;
   gap: 5px;
-  border-top: 1px solid var(--font-dark-light);
+  background-color: #e2e8f0;
+  margin-bottom: 4px;
+  border-radius: 5px;
 }
 
 #avatar-container {
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 5px;
 }
 
 #avatar {
-  height: 60px;
-  width: 60px;
-  background-color: orange;
+  height: 45px;
+  width: 45px;
+  background-color: var(--main-color);
   border-radius: 50%;
-  border: 1px solid var(--font-dark-light);
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--font-light-light);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #name-time-container {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#name-time {
+  display: flex;
+  gap: 10px;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
 }
 
 #name {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 20px;
 }
 
 #time {
   font-weight: 500;
+  color: var(--font-dark-light);
+}
+
+#date {
+  font-weight: 500;
+  color: var(--font-dark-light);
+  margin-right: 10px;
 }
 
 #review-body {
-  width: 80%;
+  width: 85%;
   height:100%;
+  overflow-wrap: break-word;
 }
 
 .reviews-form-container {
@@ -103,7 +131,6 @@
   display: flex;
   align-items: flex-end;
   background-color: white;
-  border-top: 1px solid black;
 }
 
 .review-form {
@@ -135,9 +162,7 @@
   #reviews-container {
     height: 40px;
     width: 40px;
-    border: 2px solid var(--font-dark-light);
-    position: absolute;
-    right: 2.3%;
+    right: 0;
     bottom: 200px;
   }
 
@@ -148,17 +173,17 @@
 
   .reviews-modal[open] {
     height: 80vh;
-    width: 95vw;
+    width: 98vw;
     top: 90px;
     left: 2%;
   }
 
   .review-card {
-    height: 80px;
+    height: 100px;
   }
 
   #avatar-container {
-    width: 15%;
+    width: 18%;
   }
 
   #avatar {
@@ -176,7 +201,7 @@
   }
 
   #review-body {
-    width: 100%;
+    width: 82%;
     font-size: 13px;
   }
 

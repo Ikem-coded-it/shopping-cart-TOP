@@ -14,7 +14,7 @@ export default function Signup() {
 
   async function handleSubmit (e) {
     e.preventDefault()
-    setIsRegistering(true)
+    setIsRegistering(true) // engage loading spinner
     const user = await firebaseSignUp(e.target)
 
      // check if error and show error
@@ -22,7 +22,7 @@ export default function Signup() {
     if (user instanceof Error) {
       errorDisplay.textContent = user.message;
       errorDisplay.style.opacity = 1;
-      setIsRegistering(false)
+      setIsRegistering(false) // remove loading spinner
       return
     } else {
       errorDisplay.style.opacity = 0;

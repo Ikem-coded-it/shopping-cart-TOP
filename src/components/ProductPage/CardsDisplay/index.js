@@ -42,6 +42,7 @@ export default function CardsDisplay() {
   useEffect(() => {
      onAuthStateChanged(auth, async(user) => {
        if (user) {
+        user.displayName = `${user.email.split('@')[0]}`;
         authContext.setLoggedInUser(user)
         const data = await getCart(user.uid)
 

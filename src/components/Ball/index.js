@@ -107,7 +107,8 @@ export default function Ball () {
       src: ball.src,
       price: ball.price,
       description: ball.description,
-      rating: ball.rating
+      rating: ball.rating,
+      reviews: ball.reviews
     }
 
     const newRating = {
@@ -162,7 +163,17 @@ export default function Ball () {
         <div 
         className="ball">
           <Cart />
-          <Reviews />
+          {
+            authContext.loggedInUser !== null ?
+            <Reviews 
+              ball={ball}
+              setBall={setBall}
+              updateDatabase={updateDatabase}
+              user={authContext.loggedInUser}
+            />
+            :
+            <LoadingSpinner/>
+          }
           <section 
             className="ball-image-container">
             <div 

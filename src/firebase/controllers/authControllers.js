@@ -57,10 +57,13 @@ const firebaseSignUp = async (form) => {
     const email = form.email.value;
     const password = form.password.value;
 
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-     // create empty cart for user
+    // set display name to email name
+    user.displayName = `${user.email.split('@')[0]}`;
+
+    // create empty cart for user
     await setDoc(doc(db, "carts", user.uid), {cart: []});
 
     return user;
@@ -79,7 +82,9 @@ const firebaseSignIn = async(form) => {
     const password = form.password.value
 
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    return userCredential.user;
+    const user =  userCredential.user;
+    user.displayName = `${user.email.split('@')[0]}`;
+    return user;
   } catch (error) {
     if (error.code === "auth/user-not-found" ||
         error.code === "auth/wrong-password" )
