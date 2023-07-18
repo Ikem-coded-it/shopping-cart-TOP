@@ -8,13 +8,19 @@
   }
 }
 
+.spinner-container {
+  position: fixed;
+  top: 200px;
+  left: 50vw;
+  min-height: fit-content;
+  min-width: fit-content
+}
+
 .loading-spinner {
   width: 50px;
   height: 50px;
   border: 10px solid #f3f3f3;
-  /* Light grey */
   border-top: 10px solid #383636;
-  /* Black */
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }

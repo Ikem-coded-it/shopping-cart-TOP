@@ -1,6 +1,6 @@
 .main {
   max-height: fit-content;
-  min-height: fit-content;
+  min-height: 90vh;
   background-color: var(--ball-card-background);
 }
 
