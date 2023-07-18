@@ -25,8 +25,27 @@ export default function Main() {
         slider.current.appendChild(sliderImageContainer)
       }
     }
+
+    const revealOnScroll = () => {
+      const reveals = document.querySelectorAll('.reveal')
+
+      reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const revealTop = reveal.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if(revealTop < windowHeight - revealPoint)
+          reveal.classList.add('active')
+        else
+          reveal.classList.remove('active')
+        
+      })
+    }
     
     addSliderImages()
+    window.addEventListener('scroll', () => revealOnScroll())
+
+    return window.removeEventListener('scroll', revealOnScroll)
   }, [])
 
   return(
@@ -62,10 +81,10 @@ export default function Main() {
 
       <section className="featured-products">
         <div className="featured-products-title-container">
-          <h1>Featured Products</h1>
+          <h1 className="reveal">Featured Products</h1>
         </div>
         <div className="featured-products-slide-container">
-          <div className="slider-wrapper">
+          <div className="slider-wrapper reveal">
             <div
             ref={slider} 
             className="slider">
@@ -76,7 +95,8 @@ export default function Main() {
       </section>
 
       <section className="brand-story-container">
-        <div className="write-up-container-2">
+        <div 
+          className="write-up-container-2 reveal">
           <h1>#1 Basketball Store</h1>
           <p className="brand-story-1">
             Discover the difference quality makes. Explore our collection, choose the ball that resonates with your passion
@@ -104,16 +124,43 @@ export default function Main() {
           }
         </div>
         <img
-          className="dunking-guy-image"
+          className="dunking-guy-image reveal"
           src={basketBallPic}
           alt="baller"
           loading="lazy"
          />
       </section>
 
-      {/* <div className="goal-section">
-          <div></div>
-      </div> */}
+      <div className="values-section">
+          <div className="value-1 reveal">
+            <i className="fa-solid fa-trophy value-icon"></i>
+            <div className="value-title">Our Goal</div>
+            <p className="value-words">
+              The go-to store for basketball enthusiasts, providing top-quality products and exceptional service.
+            </p>
+          </div>
+          <div className="value-2 reveal">
+            <i className="fa-solid fa-users value-icon"></i>
+            <div className="value-title">Community</div>
+            <p className="value-words">
+              Our community is an inclusive hub where players of all ages and skill levels come together to share their love for the game.
+            </p>
+          </div>
+          <div className="value-3 reveal">
+            <i className="fa-solid fa-truck-fast value-icon"></i>
+            <div className="value-title">Speed Delivery</div>
+            <p className="value-words">
+              Experience the thrill of quick product delivery as we prioritize speed and efficiency to ensure your basketball gear arrives promptly.
+            </p>
+          </div>
+          <div className="value-4 reveal">
+            <i className="fa-solid fa-person-running value-icon"></i>
+            <div className="value-title">Health</div>
+            <p className="value-words">
+              Our store's mission is to prioritize a healthy lifestyle, empowering individuals to embrace the physical and mental benefits of basketball
+            </p>
+          </div>
+      </div>
     </main>
   )
 }
