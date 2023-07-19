@@ -45,11 +45,11 @@ input {
   background-color: white;
 }
 
-input[type=number]::-webkit-inner-spin-button {
+/* input[type=number]::-webkit-inner-spin-button {
   opacity: 1;
   height: 30px;
   width: 30px;
-}
+} */
 
 .make-basket-btn {
   height: 25%;
@@ -58,7 +58,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 @media only screen and (max-width: 600px) {
   .ball-card {
-    height: 190px;
+    height: 200px;
     font-size: 17px;
     gap: 10px;
   }
@@ -74,7 +74,7 @@ input[type=number]::-webkit-inner-spin-button {
   }
 
   input {
-    height: 20px;
+    height: 30px;
     width: 50%;
   }
 

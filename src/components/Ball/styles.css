@@ -1,11 +1,13 @@
 .cart {
-  top: 110px;
+  top: 10px;
 }
 
 .ball {
   margin-top: 100px;
   height: 80vh;
   display: flex;
+  width: 100%;
+  position: relative;
 }
 
 .ball-image-container,
@@ -62,8 +64,8 @@
 
 .info-container {
   padding: 10px;
+  box-sizing: border-box;
   background-color: var(--product-page-background);
-  font-family: 'Courier New', Courier, monospace;
 }
 
 .ball-title-container {
@@ -74,18 +76,19 @@
 
 .ball-title {
   font-size: 50px;
-  font-family: monospace;
   color: var(--font-dark-light);
 }
 
 .rating-container {
   display: flex;
+  align-items: center;
   gap: 7px;
   color: var(--font-dark-light);
   font-size: 20px;
 }
 
 .fa-star {
+  font-size: 17px;
   transition: all .5s ease;
 }
 
@@ -101,9 +104,9 @@
 
 .description-container {
   height: 40%;
-  width: 80%;
+  width: 100%;
   font-size: 30px;
-  font-weight: bold;
+  text-align: center;
 }
 
 .price-container {
@@ -163,13 +166,18 @@
   justify-content: center;
 }
 
+.promo {
+  width: 100%;
+  text-align: center;
+}
+
 #ball-make-basket-btn {
   height: 90%;
 }
 
 @media only screen and (max-width: 600px) {
   .cart {
-    top: 50px;
+    top: -15px;
   }
 
     .ball {
@@ -179,7 +187,7 @@
     }
 
     .ball-image-container {
-      height: 50%;
+      height: 450px;
       width: 100%;
     }
 
@@ -193,30 +201,33 @@
   
     .info-container {
       width: 100%;
-    }
-  
-    .info-container {
+      max-height: fit-content;
+      min-height: 200px;
       padding: 5px;
+      color: black;
     }
-  
+
     .ball-title-container {
-      height: 20%;
+      height: 70px;
       display: flex;
       gap: 5px;
       align-items: flex-start;
     }
   
     .ball-title {
-      font-size: 30px;
-      margin-left: 5px;
+      font-size: 25px;
+      width: 100%;
+      text-align: center;
+      color: black;
     }
 
     .rating-container {
-      margin-left: 5px;
+      width: 100%;
+      justify-content: center;
     }
   
     .description-container {
-      height: 30%;
+      height: 160px;
       width: 100%;
       font-size: 20px;
       box-sizing: border-box;
@@ -224,12 +235,12 @@
     }
   
     .price-container {
-      height: 10%;
+      height: 40px;
       font-size: 20px;
     }
   
     .purchase-section {
-      height: 30%;
+      height: 100px;
     }
 
     .purchase-form {
@@ -240,9 +251,5 @@
     #ball-make-basket-btn {
       width: 70%;
       font-size: 20px;
-    }
-
-    .promo {
-      margin-left: 5px;
     }
 }

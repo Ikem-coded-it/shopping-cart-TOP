@@ -53,7 +53,6 @@ export default function Login () {
   return (
     <div 
       className="login">
-
       <div 
         className="basketball-image">
         <img 
@@ -103,15 +102,16 @@ export default function Login () {
           <div 
             className="login-btn-container">
             <div id="error-display"></div>
-            <button 
-              className="login-btn"
-              type="submit">
-              Login
-              {
-                isLoggingIn === true &&
-                <LoadingSpinner />
-              }
-            </button>
+            {
+              isLoggingIn ?
+              <LoadingSpinner />
+              :
+              <button 
+                className="login-btn"
+                type="submit">
+                Login
+              </button>
+            }
           </div>
         </form>
         <div

@@ -133,15 +133,16 @@ export default function Signup() {
         <div 
           className="signup-btn-container">
           <div id="signup-error-display"></div>
-          <button 
-            className="register-btn"
-            type="submit">
-            Sign up
-            {
-              isRegistering === true &&
-              <LoadingSpinner />
-            }
-          </button>
+          {
+            isRegistering ?
+            <LoadingSpinner />
+            :
+            <button 
+              className="register-btn"
+              type="submit">
+              Sign up
+            </button>
+          }
           <p className="ask-signup">
             Already have an account? <Link className="signup-link" to="/auth/login">Sign in</Link>
           </p>

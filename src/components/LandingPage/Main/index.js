@@ -124,7 +124,7 @@ export default function Main() {
           }
         </div>
         <img
-          className="dunking-guy-image reveal"
+          className="dunking-guy-image"
           src={basketBallPic}
           alt="baller"
           loading="lazy"

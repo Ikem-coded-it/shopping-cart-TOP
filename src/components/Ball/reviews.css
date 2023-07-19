@@ -175,7 +175,8 @@
   #reviews-container {
     height: 40px;
     width: 40px;
-    bottom: 130px;
+    bottom: 410px;
+    right: 0;
   }
 
   .fa-comment {
@@ -183,10 +184,10 @@
   }
 
   .reviews-modal[open] {
-    height: 80vh;
+    height: 75vh;
     width: 98vw;
-    top: 90px;
-    left: 2%;
+    top: 60px;
+    left: 15px;
   }
 
   .review-card {
@@ -203,8 +204,8 @@
   }
 
   #name {
-    font-weight: 600;
-    font-size: 17px;
+    font-weight: 500;
+    font-size: 15px;
   }
 
   #time {

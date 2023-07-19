@@ -146,7 +146,7 @@ button:hover {
   }
 
   to {
-    transform: translateX(-82%);
+    transform: translateX(-78%);
   }
 }
 
@@ -480,7 +480,7 @@ button:hover {
 
   @keyframes slide-animation {
     to {
-      transform: translateX(-90%);
+      transform: translateX(-85%);
     }
   }
 

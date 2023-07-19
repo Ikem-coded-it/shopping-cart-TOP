@@ -86,7 +86,7 @@
 }
 
 .google-auth-container {
-  height: 30%;
+  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -108,6 +108,8 @@
       flex-direction: column-reverse;
       justify-content: flex-end;
       margin-top: 0;
+      max-height: fit-content;
+      min-height: 90vh;
     }
   
     .login>div {
@@ -119,7 +121,7 @@
     }
 
     .form-container {
-      min-height: 500px;
+      min-height: 550px;
       background-image: url("./assets/Basketball-rafiki.png"), 
         linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
       background-size: cover;
@@ -129,6 +131,8 @@
     }
 
     .login-form {
+      min-height: 70%;
+      max-height: 70%;
       background-color: transparent;
       justify-content: center;
       gap: 20px;
@@ -152,6 +156,7 @@
     .email-input,
     .password-input {
       font-size: 20px;
+      height: 30px;
     }
   
     .login-btn-container {
@@ -161,6 +166,16 @@
       justify-content: center;
       align-items: center;
       gap: 5px;
+    }
+
+    #error-display {
+      height: 20px;
+      color: yellow;
+    }
+
+    .google-auth-container {
+      max-height: 30%;
+      min-height: 30%;
     }
 
     .ask-signup {

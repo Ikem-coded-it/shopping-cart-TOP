@@ -92,11 +92,14 @@
     background-repeat: no-repeat;
     background-blend-mode: darken;
     margin-top: 0;
+    min-height: 90vh;
   }
 
   .signup-form {
-      width: 80%;
+      width: 100%;
       margin-top: 20px;
+      max-height: 550px;
+      min-height: 550px;
     }
   
     .firstname-label,
@@ -116,18 +119,21 @@
       font-weight: 600;
       font-size: 17px;
       width: 80%;
+      height: 30px;
     }
 
     .signup-email-input,
     .signup-password-input {
+      height: 30px;
       width: 70%;
       font-size: 17px;
       font-family: 'Courier New', Courier, monospace;
     }
 
     #signup-error-display {
-      height: 3%;
+      height: 20px;
       margin-top: 10px;
+      color: yellow;
     }
 
     .register-btn {
