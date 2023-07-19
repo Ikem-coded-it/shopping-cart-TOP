@@ -45,12 +45,6 @@ input {
   background-color: white;
 }
 
-/* input[type=number]::-webkit-inner-spin-button {
-  opacity: 1;
-  height: 30px;
-  width: 30px;
-} */
-
 .make-basket-btn {
   height: 25%;
   width: 90%;
